@@ -1,13 +1,13 @@
-/** 
+/**
  * @file sprite_gem.h
- * @brief The gem sprite 
- * @created 2004-04-12 
+ * @brief The gem sprite
+ * @created 2004-04-12
  * @date 2007-03-09
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,26 +30,23 @@
 #define __SPRITE_GEM__
 class sprite_gem;
 
-#include "../include/sprite_object.h"
 #include "../include/sprite_ball.h"
+#include "../include/sprite_object.h"
 #include "../include/sprite_projectile.h"
 
-typedef enum
-{
+typedef enum {
   GREY_SQUARE,
   GREEN_SPHERE,
   YELLOW_RING,
   BLUE_TRIANGLE,
   GOLD_RHOMBUS,
   BRONZE_PENTAGON
-}
-GEMS_ENUM;
+} GEMS_ENUM;
 
-class sprite_gem:public sprite_object
-{
+class sprite_gem : public sprite_object {
   friend class controller_moneys;
 
-private:
+ private:
   /** Toward bottom, right, top, left */
   Uint32 towards;
   /** Moving speed in pixels of the gem */
@@ -58,24 +55,24 @@ private:
   bool is_indicator;
   /** Gem identifier GREY_SQUARE to BRONZE_PENTAGON */
   Uint32 gem_id;
-  sprite_paddle *paddle;
+  sprite_paddle* paddle;
   Uint32 blink_counter;
   Uint32 rand_count;
 
-public:
-    sprite_gem ();
-   ~sprite_gem ();
-  bool enable_if_available (sprite_ball *ball);
-  bool enable_if_available (sprite_projectile *blast);
-  void collect (Uint32 id);
-  void enable_blink ();
-  Sint32 move ();
+ public:
+  sprite_gem();
+  ~sprite_gem();
+  bool enable_if_available(sprite_ball* ball);
+  bool enable_if_available(sprite_projectile* blast);
+  void collect(Uint32 id);
+  void enable_blink();
+  Sint32 move();
 
-private:
-  void init_gem (Sint32 pos_x, Sint32 pos_y, sprite_paddle *pad);
-  void blink ();
+ private:
+  void init_gem(Sint32 pos_x, Sint32 pos_y, sprite_paddle* pad);
+  void blink();
 
-private:
+ private:
   static const Uint32 gem_random[8];
 };
 #endif

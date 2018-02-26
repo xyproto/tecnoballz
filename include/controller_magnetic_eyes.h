@@ -1,13 +1,13 @@
-/** 
+/**
  * @file controller_magnetic_eyes.h
- * @brief Magectic eyes controller 
- * @created 2004-09-17 
+ * @brief Magectic eyes controller
+ * @created 2004-09-17
  * @date 2007-04-08
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,18 +31,17 @@
 class controller_magnetic_eyes;
 
 #include "../include/list_sprites.h"
-#include "../include/sprite_eye.h"
 #include "../include/objects_list.h"
+#include "../include/sprite_eye.h"
 
-class controller_magnetic_eyes:public objects_list < sprite_eye, controller_magnetic_eyes >
-{
+class controller_magnetic_eyes : public objects_list<sprite_eye, controller_magnetic_eyes> {
   friend class sprite_eye;
 
-private:
+ private:
   static const Uint16 x_coordinates[32];
   static const Uint16 y_coordinates[32];
 
-public:
+ public:
   /** Value used for the collisions with balls */
   Sint32 hypotenuse;
   /** X-coordinate of the eyes centers */
@@ -50,11 +49,11 @@ public:
   /** Y-coordinate of the eyes centers */
   Sint32 center_y;
 
-public:
-    controller_magnetic_eyes ();
-   ~controller_magnetic_eyes ();
-  bool create_eye ();
-  void create_eyes_list ();
-  void move ();
+ public:
+  controller_magnetic_eyes();
+  ~controller_magnetic_eyes();
+  bool create_eye();
+  void create_eyes_list();
+  void move();
 };
 #endif

@@ -1,12 +1,12 @@
-/** 
- * @file controller_ships.cc 
- * @brief Ship controller 
+/**
+ * @file controller_ships.cc
+ * @brief Ship controller
  * @date 2007-10-17
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,9 +30,8 @@
 /**
  * Create a ships controller
  */
-controller_ships::controller_ships ()
-{
-  littleInit ();
+controller_ships::controller_ships() {
+  littleInit();
   max_of_sprites = 8;
   sprites_have_shades = true;
   sprite_type_id = sprite_object::SHIPS;
@@ -41,24 +40,25 @@ controller_ships::controller_ships ()
 /**
  * Release a ships controller
  */
-controller_ships::~controller_ships ()
-{
-  release_sprites_list ();
+controller_ships::~controller_ships() {
+  release_sprites_list();
 }
 
 /**
  * Initialize the ships
- * @param time0 time delay before the first apparition 
- * @param time1 time delay before the first apparition 
+ * @param time0 time delay before the first apparition
+ * @param time1 time delay before the first apparition
  * @param time2 time delay before the first apparition
  * @param time3 time delay before the first apparition
  * @param time4 time delay before the first apparition
  * @param power strength
  */
-void
-controller_ships::initialise (Sint32 time0, Sint32 time1, Sint32 time2,
-                              Sint32 time3, Sint32 time4, Sint32 power)
-{
+void controller_ships::initialise(Sint32 time0,
+                                  Sint32 time1,
+                                  Sint32 time2,
+                                  Sint32 time3,
+                                  Sint32 time4,
+                                  Sint32 power) {
   reappTemps = time0;
   apparition[0] = time1;
   apparition[1] = time2;
@@ -70,10 +70,9 @@ controller_ships::initialise (Sint32 time0, Sint32 time1, Sint32 time2,
   Sint32 j = 0;
   Sint32 offs1 = 20 * sprite_ship::ATOM_ANIMA;
   Sint32 offs2 = 21 * sprite_ship::ATOM_ANIMA;
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_ship *ship = sprites_list[i];
-      ship->littleInit (
+  for (Uint32 i = 0; i < max_of_sprites; i++) {
+    sprite_ship* ship = sprites_list[i];
+    ship->littleInit(
         /* time delay before activation */
         time0,
         /* time delay before first activation */
@@ -88,36 +87,30 @@ controller_ships::initialise (Sint32 time0, Sint32 time1, Sint32 time2,
         y + (i * 16 * resolution),
         /* image number of the explosion */
         offs1);
-      j++;
-      j &= 3;
-      Sint32 k = offs2;
-      offs2 = offs1;
-      offs1 = k;
-    }
+    j++;
+    j &= 3;
+    Sint32 k = offs2;
+    offs2 = offs1;
+    offs1 = k;
+  }
 }
 
 /**
  * Move all ships
  */
-void
-controller_ships::move ()
-{
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_ship *ship = sprites_list[i];
-      ship->move ();
-    }
+void controller_ships::move() {
+  for (Uint32 i = 0; i < max_of_sprites; i++) {
+    sprite_ship* ship = sprites_list[i];
+    ship->move();
+  }
 }
 
 /**
  * Force the explosion of all ships
  */
-void
-controller_ships::force_explosion ()
-{
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_ship *ship = sprites_list[i];
-      ship->explode ();
-    }
+void controller_ships::force_explosion() {
+  for (Uint32 i = 0; i < max_of_sprites; i++) {
+    sprite_ship* ship = sprites_list[i];
+    ship->explode();
+  }
 }

@@ -1,13 +1,13 @@
-/** 
- * @file sprite_display_scores.h 
- * @brief Sprite wich display text of the score table 
- * @created 2003-04-30 
+/**
+ * @file sprite_display_scores.h
+ * @brief Sprite wich display text of the score table
+ * @created 2003-04-30
  * @date 2007-02-18
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,32 +31,28 @@
 
 class sprite_display_scores;
 
+#include "../include/bitmap_data.h"
 #include "../include/display_text_bitmap.h"
 #include "../include/sprite_object.h"
-#include "../include/bitmap_data.h"
 
+class sprite_display_scores : public virtual display_text_bitmap, public virtual sprite_object {
+ private:
+  static const Sint32 TEXT_LARGE = 23;  // number of characters by lines
+  static const Sint32 TEXT_HAUTE = 12;  // number of lines of characters
+  static char scorestext[];             // list of names and score
 
-class sprite_display_scores:public virtual display_text_bitmap,
-  public virtual sprite_object
-{
-
-private:
-  static const Sint32 TEXT_LARGE = 23;  //number of characters by lines
-  static const Sint32 TEXT_HAUTE = 12;  //number of lines of characters
-  static char scorestext[];     //list of names and score
-
-  Sint32 width_font;            //fonte's width font 8 or 16
-  Sint32 heightfont;            //fonte's height
-  Sint32 space2next;            //number of lines to next fonte 9 or 18
-  bitmap_data *offscreen_text;
+  Sint32 width_font;  // fonte's width font 8 or 16
+  Sint32 heightfont;  // fonte's height
+  Sint32 space2next;  // number of lines to next fonte 9 or 18
+  bitmap_data* offscreen_text;
   Sint32 run_offset;
   Sint32 max_offset;
 
-public:
-    sprite_display_scores ();
-   ~sprite_display_scores ();
-  void first_init (Uint32 x_offset = 0);
-  void copyToText ();
-  Sint32 displayTxt ();
+ public:
+  sprite_display_scores();
+  ~sprite_display_scores();
+  void first_init(Uint32 x_offset = 0);
+  void copyToText();
+  Sint32 displayTxt();
 };
 #endif

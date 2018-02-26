@@ -1,6 +1,6 @@
 /**
  * @file sprite_eye.h
- * @brief The sprite of the eye used in bricks level 
+ * @brief The sprite of the eye used in bricks level
  * @created 2004-09-17
  * @date 2007-09-12
  * @copyright 1991-2016 TLK Games
@@ -29,25 +29,24 @@
 #ifndef __SPRITE_EYE__
 #define __SPRITE_EYE__
 class sprite_eye;
-#include "../include/sprite_object.h"
-#include "../include/sprite_ball.h"
-#include "../include/controller_bricks.h"
 #include "../include/controller_balls.h"
+#include "../include/controller_bricks.h"
 #include "../include/controller_magnetic_eyes.h"
-class sprite_eye:public sprite_object
-  {
-    friend class controller_balls;
-    friend class controller_magnetic_eyes;
+#include "../include/sprite_ball.h"
+#include "../include/sprite_object.h"
+class sprite_eye : public sprite_object {
+  friend class controller_balls;
+  friend class controller_magnetic_eyes;
 
-  private:
-    Sint32 finishPosx;
-    Sint32 finishPosy;
-    Sint32 centerPosx;
-    Sint32 centerPosy;
-    Sint32 radius_360;
+ private:
+  Sint32 finishPosx;
+  Sint32 finishPosy;
+  Sint32 centerPosx;
+  Sint32 centerPosy;
+  Sint32 radius_360;
 
-  public:
-    sprite_eye ();
-    ~sprite_eye ();
-  };
+ public:
+  sprite_eye();
+  ~sprite_eye();
+};
 #endif

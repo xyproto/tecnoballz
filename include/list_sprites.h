@@ -1,11 +1,11 @@
-/** 
+/**
  * @file list_sprites.h
  * @brief Call the drawing methods of all sprites
  * @date 2007-09-15
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,26 +31,25 @@ class list_sprites;
 #include "../include/sprite_object.h"
 #include "../include/tecnoballz.h"
 
-class list_sprites:public tecnoballz
-{
-private:
+class list_sprites : public tecnoballz {
+ private:
   Sint32 num_of_shapes;
   Sint32 num_of_shadows;
   Sint32 max_of_shapes;
-  sprite_object **shapes;
-  sprite_object **shadows;
+  sprite_object** shapes;
+  sprite_object** shadows;
 
-public:
-    list_sprites ();
-   ~list_sprites ();
-  void init (Uint32 numof);
-  void reset ();
-  Uint32 get_sprites_remaining ();
-  void add (sprite_object * sprite);
-  void draw ();
-  void clear ();
+ public:
+  list_sprites();
+  ~list_sprites();
+  void init(Uint32 numof);
+  void reset();
+  Uint32 get_sprites_remaining();
+  void add(sprite_object* sprite);
+  void draw();
+  void clear();
 };
 
-extern list_sprites *sprites;
+extern list_sprites* sprites;
 
 #endif

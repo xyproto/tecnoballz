@@ -1,12 +1,12 @@
-/** 
+/**
  * @file controller_ships.h
- * @brief Ship controller 
+ * @brief Ship controller
  * @date 2007-02-13
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -29,27 +29,32 @@
 #define __CONTROLLER_SHIPS__
 class controller_ships;
 
-#include "../include/list_sprites.h"
-#include "../include/sprite_ship.h"
-#include "../include/objects_list.h"
-#include "../include/handler_display.h"
-#include "../include/controller_moneys.h"
-#include "../include/controller_gems.h"
 #include "../include/controller_bricks.h"
+#include "../include/controller_gems.h"
+#include "../include/controller_moneys.h"
+#include "../include/handler_display.h"
+#include "../include/list_sprites.h"
+#include "../include/objects_list.h"
+#include "../include/sprite_ship.h"
 
-class controller_ships:public objects_list < sprite_ship, controller_ships >
-{
+class controller_ships : public objects_list<sprite_ship, controller_ships> {
   friend class sprite_ship;
-private:
+
+ private:
   Sint32 apparition[4];
   Sint32 reappTemps;
   Sint32 power_init;
-public:
-    controller_ships ();
-   ~controller_ships ();
-  void initialise (Sint32 time0, Sint32 time1, Sint32 time2,
-                   Sint32 time3, Sint32 time4, Sint32 power);
-  void move ();
-  void force_explosion ();
+
+ public:
+  controller_ships();
+  ~controller_ships();
+  void initialise(Sint32 time0,
+                  Sint32 time1,
+                  Sint32 time2,
+                  Sint32 time3,
+                  Sint32 time4,
+                  Sint32 power);
+  void move();
+  void force_explosion();
 };
 #endif

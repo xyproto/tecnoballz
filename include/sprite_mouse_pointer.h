@@ -1,12 +1,12 @@
-/** 
+/**
  * @file sprite_mouse_pointer.h
- * @brief The sprite of the mouse pointer 
+ * @brief The sprite of the mouse pointer
  * @date 2007-02-05
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -29,12 +29,11 @@
 #define __SPRITE_MOUSE_POINTER__
 class sprite_mouse_pointer;
 #include "../include/sprite_object.h"
-class sprite_mouse_pointer:public sprite_object
-{
-public:
-  sprite_mouse_pointer ();
-  ~sprite_mouse_pointer ();
-  void create_pointer_sprite (bitmap_data * bmp);
-  void move ();
+class sprite_mouse_pointer : public sprite_object {
+ public:
+  sprite_mouse_pointer();
+  ~sprite_mouse_pointer();
+  void create_pointer_sprite(bitmap_data* bmp);
+  void move();
 };
 #endif

@@ -1,12 +1,12 @@
-/** 
+/**
  * @file sprite_font_menu.h
- * @brief The fonte sprite used in the main menu 
+ * @brief The fonte sprite used in the main menu
  * @date 2007-02-05
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,16 +30,15 @@
 
 #include "../include/sprite_object.h"
 
-class sprite_font_menu:public virtual sprite_object
-{
+class sprite_font_menu : public virtual sprite_object {
   friend class controller_font_menu;
 
-protected:
+ protected:
   Sint32 zeCosValue;
   Sint32 zeSinValue;
 
-public:
-    sprite_font_menu ();
-   ~sprite_font_menu ();
+ public:
+  sprite_font_menu();
+  ~sprite_font_menu();
 };
 #endif

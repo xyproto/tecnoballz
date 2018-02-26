@@ -1,5 +1,5 @@
-/** 
- * @file offscreen_surface.h 
+/**
+ * @file offscreen_surface.h
  * @brief an offscreen drawing surface
  * @created 2007-01-31
  * @date 2007-04-10
@@ -7,7 +7,7 @@
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -26,28 +26,42 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-#ifndef __OFFSCREEN_SURFACE__ 
+#ifndef __OFFSCREEN_SURFACE__
 #define __OFFSCREEN_SURFACE__
-#include "../include/tecnoballz.h"
-#include "../include/surface_sdl.h"
 #include "../include/display_text_bitmap.h"
+#include "../include/surface_sdl.h"
+#include "../include/tecnoballz.h"
 
-class offscreen_surface:public virtual surface_sdl 
-{
-private:
+class offscreen_surface : public virtual surface_sdl {
+ private:
   Uint32 vertical_offset;
 
-public:
-  offscreen_surface (Uint32 width, Uint32 height, Uint32 depth, Uint32 voffset = 0);
-  ~offscreen_surface ();
-  Uint32 get_vertical_offset ();
-  void clear (Uint32 color = 0);
-  void clear (Uint32 color, Uint32 xcoord, Uint32 ycoord, Uint32 w, Uint32 height);
-  void blit_to_surface (offscreen_surface *offscreen);
-  void blit_to_surface (offscreen_surface *offscreen, Uint32 xcoord, Uint32 ycoord, Uint32 width, Uint32 height);
-  void blit_to_surface (offscreen_surface *offscreen, Uint32 x1, Uint32 y1, Uint32 x2, Uint32 y2, Uint32 w, Uint32 h);
-  void blit_surface (surface_sdl *dest, Uint32 x1, Uint32 y1, Uint32 x2, Uint32 y2, Uint32 w, Uint32 h);
-  void draw_text (display_text_bitmap* display_text, Uint32 xcoord, Uint32 ycoord, const char* str, Uint32 lentgh);
-  surface_sdl *cut_to_surface (Sint32 xcoord, Sint32 ycoord, Uint32 w, Uint32 h);
+ public:
+  offscreen_surface(Uint32 width, Uint32 height, Uint32 depth, Uint32 voffset = 0);
+  ~offscreen_surface();
+  Uint32 get_vertical_offset();
+  void clear(Uint32 color = 0);
+  void clear(Uint32 color, Uint32 xcoord, Uint32 ycoord, Uint32 w, Uint32 height);
+  void blit_to_surface(offscreen_surface* offscreen);
+  void blit_to_surface(offscreen_surface* offscreen,
+                       Uint32 xcoord,
+                       Uint32 ycoord,
+                       Uint32 width,
+                       Uint32 height);
+  void blit_to_surface(offscreen_surface* offscreen,
+                       Uint32 x1,
+                       Uint32 y1,
+                       Uint32 x2,
+                       Uint32 y2,
+                       Uint32 w,
+                       Uint32 h);
+  void
+  blit_surface(surface_sdl* dest, Uint32 x1, Uint32 y1, Uint32 x2, Uint32 y2, Uint32 w, Uint32 h);
+  void draw_text(display_text_bitmap* display_text,
+                 Uint32 xcoord,
+                 Uint32 ycoord,
+                 const char* str,
+                 Uint32 lentgh);
+  surface_sdl* cut_to_surface(Sint32 xcoord, Sint32 ycoord, Uint32 w, Uint32 h);
 };
 #endif

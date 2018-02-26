@@ -31,51 +31,39 @@
 /**
  * Create the Gigablitz sprite
  */
-sprite_brick::sprite_brick ()
-{
+sprite_brick::sprite_brick() {
   current_cycling = &sprite_object::cycling_01[0];
-  set_draw_method (sprite_object::DRAW_CAPSULE);
-  clear_sprite_members ();
+  set_draw_method(sprite_object::DRAW_CAPSULE);
+  clear_sprite_members();
   original_color = current_color = 239;
 }
 
 /**
  * Release the Gigablitz sprite
  */
-sprite_brick::~sprite_brick ()
-{
-}
+sprite_brick::~sprite_brick() {}
 
 /**
  * Set the brick color
  * @param color Palette index from 239 to 255
  */
-void
-sprite_brick::set_color (Uint32 color)
-{
+void sprite_brick::set_color(Uint32 color) {
   original_color = current_color = color;
 }
 
-void
-sprite_brick::touch ()
-{
+void sprite_brick::touch() {
   current_color = original_color + 1;
-  if (current_color > 255)
-    {
-      current_color = 239;
-    }
+  if (current_color > 255) {
+    current_color = 239;
+  }
 }
 
-bool sprite_brick::is_cycling ()
-{
-  if (current_color == original_color)
-    {
-      return false;
-    }
-  else
-    {
-      return true;
-    }
+bool sprite_brick::is_cycling() {
+  if (current_color == original_color) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 /**
@@ -83,61 +71,46 @@ bool sprite_brick::is_cycling ()
  * @param h_pos Brick vertical position in the bricks bitmap
  *              0, 1, 2, 3, 4, 5, 6, 7, or 8
  */
-void
-sprite_brick::update_image (Uint32 h_pos)
-{
-  if (h_pos == 0)
-    {
-      return;
-    }
+void sprite_brick::update_image(Uint32 h_pos) {
+  if (h_pos == 0) {
+    return;
+  }
   Sint32 index = frame_index - frame_index % 7 + (h_pos >> 1);
-  set_image (index);
+  set_image(index);
 }
 
-
-
-void
-sprite_brick::draw ()
-{
-  if (!is_enabled || frame_index >= max_of_images)
-    {
-      return;
-    }
+void sprite_brick::draw() {
+  if (!is_enabled || frame_index >= max_of_images) {
+    return;
+  }
   Uint32 color = current_color;
-  if (color != original_color)
-    {
-      if (++current_color > 255)
-        {
-          current_color = 239;
-        }
+  if (color != original_color) {
+    if (++current_color > 255) {
+      current_color = 239;
     }
+  }
 
-  char *screen = game_screen->get_pixel_data (x_coord, y_coord);
+  char* screen = game_screen->get_pixel_data(x_coord, y_coord);
   screen_ptr = screen;
-  restore_ptr = background_screen->get_pixel_data (x_coord, y_coord);
+  restore_ptr = background_screen->get_pixel_data(x_coord, y_coord);
   /* pixels data of the sprite image */
-  char *pixels = current_drawing_data;
+  char* pixels = current_drawing_data;
   /* offsets and counters of loops for copies */
-  Uint16 *counters = (Uint16 *) current_drawing_pixels;
+  Uint16* counters = (Uint16*)current_drawing_pixels;
   Uint32 h = (Uint32) * (counters++);
-  for (Uint32 i = 0; i < h; i++)
-    {
-      /* offset */
-      Sint16 k = *(counters++);
-      screen = screen + k;
-      /* number of contiguous bytes */
-      k = *(counters++);
-      for (Sint32 j = 0; j < k; j++)
-        {
-          char p = *(pixels++);
-          if (p == 29)
-            {
-              *(screen++) = color;
-            }
-          else
-            {
-              *(screen++) = p;
-            }
-        }
+  for (Uint32 i = 0; i < h; i++) {
+    /* offset */
+    Sint16 k = *(counters++);
+    screen = screen + k;
+    /* number of contiguous bytes */
+    k = *(counters++);
+    for (Sint32 j = 0; j < k; j++) {
+      char p = *(pixels++);
+      if (p == 29) {
+        *(screen++) = color;
+      } else {
+        *(screen++) = p;
+      }
     }
+  }
 }

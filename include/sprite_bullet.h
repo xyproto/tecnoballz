@@ -1,12 +1,12 @@
-/** 
+/**
  * @file sprite_bullet.h
- * @brief The bullet sprite from a guardian 
+ * @brief The bullet sprite from a guardian
  * @date 2007-09-27
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,15 +30,14 @@
 
 class sprite_bullet;
 
-#include "../include/sprite_object.h"
 #include "../include/sprite_guardian.h"
+#include "../include/sprite_object.h"
 #include "../include/sprite_paddle.h"
 
-class sprite_bullet:public sprite_object
-{
+class sprite_bullet : public sprite_object {
   friend class controller_bullets;
 
-private:
+ private:
   /** Type of displacement from 1 to 7 */
   Uint32 displacement;
   Sint32 flagDepla1;
@@ -48,33 +47,33 @@ private:
   Sint32 flagDepla5;
   Sint32 flagDepla6;
   Sint32 flagDepla7;
-  const short *tablesinus;
-  const short *tablecosin;
-  sprite_paddle *paddle_target;
-  sprite_guardian *ptguardian;
+  const short* tablesinus;
+  const short* tablecosin;
+  sprite_paddle* paddle_target;
+  sprite_guardian* ptguardian;
   Sint32 tir_maxi_x;
   Sint32 tir_maxi_y;
   Sint32 tir_minixy;
 
-public:
-    sprite_bullet ();
-   ~sprite_bullet ();
-  void move ();
+ public:
+  sprite_bullet();
+  ~sprite_bullet();
+  void move();
 
-private:
-  void trajectory_01 ();
-  void trajectory_02 ();
-  void trajectory_03 ();
-  void trajectory_04 ();
-  void trajectory_05 ();
-  void trajectory_06 ();
-  void trajectory_07 ();
-  void trajectory_08 ();
-  void trajectory_09 ();
-  void trajectory_10 ();
-  void trajectory_11 ();
-  void trajectory_12 ();
-  void screenOver (Sint32 xmini);
-  void screenStop (Sint32 vmini);
+ private:
+  void trajectory_01();
+  void trajectory_02();
+  void trajectory_03();
+  void trajectory_04();
+  void trajectory_05();
+  void trajectory_06();
+  void trajectory_07();
+  void trajectory_08();
+  void trajectory_09();
+  void trajectory_10();
+  void trajectory_11();
+  void trajectory_12();
+  void screenOver(Sint32 xmini);
+  void screenStop(Sint32 vmini);
 };
 #endif

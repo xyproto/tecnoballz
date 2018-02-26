@@ -1,7 +1,7 @@
 /**
  * @file sprite_wall.h
- * @brief The sprite of the wall used in bricks level 
- * @created 2007-1O-04 
+ * @brief The sprite of the wall used in bricks level
+ * @created 2007-1O-04
  * @date 2007-1O-05
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
@@ -30,19 +30,19 @@
 #define __SPRITE_WALL__
 class sprite_wall;
 #include "../include/sprite_object.h"
-class sprite_wall:public sprite_object
-  {
+class sprite_wall : public sprite_object {
   static sprite_wall* sprite_wall_singleton;
 
-  public:
-    Sint32 thecounter;
+ public:
+  Sint32 thecounter;
 
-  private:
-    sprite_wall ();
-  public:
-    ~sprite_wall ();
-    void enable (Uint32 counter);
-    void disable ();
-  static sprite_wall * get_instance ();
-  };
+ private:
+  sprite_wall();
+
+ public:
+  ~sprite_wall();
+  void enable(Uint32 counter);
+  void disable();
+  static sprite_wall* get_instance();
+};
 #endif

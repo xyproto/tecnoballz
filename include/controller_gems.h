@@ -25,29 +25,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
-*/
+ */
 #ifndef __CONTROLLER_GEMS__
 #define __CONTROLLER_GEMS__
 
 class controller_gems;
 
+#include "../include/handler_players.h"
 #include "../include/objects_list.h"
 #include "../include/sprite_gem.h"
-#include "../include/handler_players.h"
 
-class controller_gems:public objects_list < sprite_gem, controller_gems >
-  {
-  public:
-    static const Uint32 MAX_OF_GEMS = 6;
+class controller_gems : public objects_list<sprite_gem, controller_gems> {
+ public:
+  static const Uint32 MAX_OF_GEMS = 6;
 
-  private:
-
-  public:
-    controller_gems ();
-    ~controller_gems ();
-    void initialize ();
-    void send (sprite_ball * ball);
-    void send (sprite_projectile * blast);
-    void move ();
-  };
+ private:
+ public:
+  controller_gems();
+  ~controller_gems();
+  void initialize();
+  void send(sprite_ball* ball);
+  void send(sprite_projectile* blast);
+  void move();
+};
 #endif

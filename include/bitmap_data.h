@@ -1,13 +1,13 @@
-/** 
- * @file bitmap_data.h 
- * @briefi Handle the bitmap 
- * @created 1996-06-29 
+/**
+ * @file bitmap_data.h
+ * @briefi Handle the bitmap
+ * @created 1996-06-29
  * @date 2007-04-09
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -29,12 +29,11 @@
 #ifndef __BITMAP_DATA__
 #define __BITMAP_DATA__
 class bitmap_data;
-#include "../include/tecnoballz.h"
 #include "../include/surface_sdl.h"
+#include "../include/tecnoballz.h"
 
-class bitmap_data:public virtual surface_sdl 
-{
-private:
+class bitmap_data : public virtual surface_sdl {
+ private:
   /** Height in linges */
   Uint32 height;
   /** Width in pixels */
@@ -48,29 +47,28 @@ private:
   /** Palette of 256 colors */
   unsigned char palette[768];
 
-public:
-    bitmap_data ();
-   ~bitmap_data ();
+ public:
+  bitmap_data();
+  ~bitmap_data();
 
-  void clear_members ();
-  void release ();
-  Uint32 get_width ();
-  Uint32 get_row_size ();
-  Uint32 get_height ();
-  char *get_pixel_data (Sint32 xcoord, Sint32 ycoord);
-  char *get_pixel_data ();
-  Sint32 get_offset (Sint32 xcoord, Sint32 ycoord);
-  Sint32 get_line_modulo (Sint32 w);
-  void create_surface (Uint32 w, Uint32 h);
-  char *duplicate_pixel_data ();
-  void enable_palette ();
-  unsigned char *get_palette ();
-  void load (char *filename);
-  void load (Sint32 id);
-  bitmap_data *cut_to_bitmap (Sint32 xcoord, Sint32 ycoord, Uint32 w,
-                               Uint32 h);
+  void clear_members();
+  void release();
+  Uint32 get_width();
+  Uint32 get_row_size();
+  Uint32 get_height();
+  char* get_pixel_data(Sint32 xcoord, Sint32 ycoord);
+  char* get_pixel_data();
+  Sint32 get_offset(Sint32 xcoord, Sint32 ycoord);
+  Sint32 get_line_modulo(Sint32 w);
+  void create_surface(Uint32 w, Uint32 h);
+  char* duplicate_pixel_data();
+  void enable_palette();
+  unsigned char* get_palette();
+  void load(char* filename);
+  void load(Sint32 id);
+  bitmap_data* cut_to_bitmap(Sint32 xcoord, Sint32 ycoord, Uint32 w, Uint32 h);
 
-private:
-  void sdl_load_bmp (char *filename);
+ private:
+  void sdl_load_bmp(char* filename);
 };
 #endif

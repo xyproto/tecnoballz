@@ -1,12 +1,12 @@
-/** 
- * @file sprite_mouse_pointer.cc 
- * @brief The sprite of the mouse pointer 
+/**
+ * @file sprite_mouse_pointer.cc
+ * @brief The sprite of the mouse pointer
  * @date 2007-10-21
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -26,60 +26,50 @@
  * MA  02110-1301, USA.
  */
 #include "../include/sprite_mouse_pointer.h"
-#include "../include/handler_keyboard.h"
 #include "../include/handler_display.h"
+#include "../include/handler_keyboard.h"
 #include "../include/list_sprites.h"
 
 /**
  * Create the mouse pointer sprite
  */
-sprite_mouse_pointer::sprite_mouse_pointer ()
-{
-  clear_sprite_members ();
+sprite_mouse_pointer::sprite_mouse_pointer() {
+  clear_sprite_members();
 }
 
 /**
  * Release the mouse pointer sprite
  */
-sprite_mouse_pointer::~sprite_mouse_pointer ()
-{
-}
+sprite_mouse_pointer::~sprite_mouse_pointer() {}
 
 /**
  * Create the sprite data and initialize it
  */
-void
-sprite_mouse_pointer::create_pointer_sprite (bitmap_data * bmp)
-{
+void sprite_mouse_pointer::create_pointer_sprite(bitmap_data* bmp) {
   Uint32 id;
-  if (random_counter & 1)
-    {
-      id = sprite_object::MOUSE_POINTER_1;
-    }
-  else
-    {
-      id = sprite_object::MOUSE_POINTER_2;
-    }
-  create_sprite (id, bmp, 0);
-  sprites->add (this);
-  Uint32 x = game_screen->get_width () / 2;
-  Uint32 y = game_screen->get_height () / 2;
-  set_coordinates (x, y);
-  enable ();
-  set_frame_delay (3);
+  if (random_counter & 1) {
+    id = sprite_object::MOUSE_POINTER_1;
+  } else {
+    id = sprite_object::MOUSE_POINTER_2;
+  }
+  create_sprite(id, bmp, 0);
+  sprites->add(this);
+  Uint32 x = game_screen->get_width() / 2;
+  Uint32 y = game_screen->get_height() / 2;
+  set_coordinates(x, y);
+  enable();
+  set_frame_delay(3);
 }
 
 /**
  * Moving the mouse pointer
  */
-void
-sprite_mouse_pointer::move ()
-{
-  Sint32 offsX = keyboard->get_mouse_x ();
-  Sint32 offsY = keyboard->get_mouse_y ();
-  move_x (offsX);
-  move_y (offsY);
-  set_coordinates (offsX, offsY);
-  clip_coordinates ();
-  play_animation_loop ();
+void sprite_mouse_pointer::move() {
+  Sint32 offsX = keyboard->get_mouse_x();
+  Sint32 offsY = keyboard->get_mouse_y();
+  move_x(offsX);
+  move_y(offsY);
+  set_coordinates(offsX, offsY);
+  clip_coordinates();
+  play_animation_loop();
 }

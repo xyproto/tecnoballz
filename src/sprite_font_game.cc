@@ -1,5 +1,5 @@
 /**
- * @file sprite_font_game.cc 
+ * @file sprite_font_game.cc
  * @brief The sprite font used to display a char of the
  *        "LEVEL COMPLETED" string
  * @date 2007-10-17
@@ -31,17 +31,15 @@
 /**
  * Create a fonte game sprite
  */
-sprite_font_game::sprite_font_game ()
-{
-  clear_sprite_members ();
-  initialize (0, 0, 0, 0, 0, 0);
+sprite_font_game::sprite_font_game() {
+  clear_sprite_members();
+  initialize(0, 0, 0, 0, 0, 0);
 }
 
 /**
  * Release a fonte game sprite
  */
-sprite_font_game::~sprite_font_game ()
-{}
+sprite_font_game::~sprite_font_game() {}
 
 /**
  * Initialize radius, stop coordinate and start y coordinate
@@ -49,13 +47,15 @@ sprite_font_game::~sprite_font_game ()
  * @param x_stop Final x-coordinate
  * @param y_start First y-coordinate
  * @param xinc Horizontal speed in pixels
- * @param yinc Vertical speed in pixel 
+ * @param yinc Vertical speed in pixel
  * @param y_stop Final y-coordinate
  */
-void
-sprite_font_game::initialize (Uint32 radius, Sint32 x_stop, Sint32 y_start,
-                              Sint32 xinc, Sint32 yinc, Sint32 y_stop)
-{
+void sprite_font_game::initialize(Uint32 radius,
+                                  Sint32 x_stop,
+                                  Sint32 y_start,
+                                  Sint32 xinc,
+                                  Sint32 yinc,
+                                  Sint32 y_stop) {
   current_radius = radius;
   xcoord_final = x_stop;
   ycoord_current = y_start;
@@ -67,35 +67,30 @@ sprite_font_game::initialize (Uint32 radius, Sint32 x_stop, Sint32 y_start,
 /**
  * Character moving
  */
-void
-sprite_font_game::move ()
-{
-  if (is_enabled)
-    {
-      /* ordinate linear moving */
-      Sint32 d = ycoord_current;
-      if (d > ycoord_final)
-        {
-          d += y_inc;
-          ycoord_current = d;
-        }
-
-      /* ordinate sinus moving */
-      Sint32 a = current_radius + 5;
-      a &= SINUS_MASK;
-      current_radius = a;
-      Sint16 *s = table_sinL + a;
-      a = *s;
-      a *= 10 * resolution;
-      a >>= SINUS_DECA;
-      a = a + d;
-      y_coord = a;
-
-      /* absciss moving */
-      if (x_coord != xcoord_final)
-        {
-          x_coord += x_inc;
-        }
+void sprite_font_game::move() {
+  if (is_enabled) {
+    /* ordinate linear moving */
+    Sint32 d = ycoord_current;
+    if (d > ycoord_final) {
+      d += y_inc;
+      ycoord_current = d;
     }
-  clip_coordinates ();
+
+    /* ordinate sinus moving */
+    Sint32 a = current_radius + 5;
+    a &= SINUS_MASK;
+    current_radius = a;
+    Sint16* s = table_sinL + a;
+    a = *s;
+    a *= 10 * resolution;
+    a >>= SINUS_DECA;
+    a = a + d;
+    y_coord = a;
+
+    /* absciss moving */
+    if (x_coord != xcoord_final) {
+      x_coord += x_inc;
+    }
+  }
+  clip_coordinates();
 }

@@ -1,13 +1,13 @@
-/** 
+/**
  * @file controller_spheres.h
- * @brief Metallic spheres controller used in congratulations 
- * @created 2004-08-05 
+ * @brief Metallic spheres controller used in congratulations
+ * @created 2004-08-05
  * @date 2007-04-09
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,22 +31,22 @@
 
 class controller_spheres;
 
-#include "../include/sprite_object.h"
 #include "../include/objects_list.h"
 #include "../include/sprite_display_scores.h"
+#include "../include/sprite_object.h"
 
-class controller_spheres:public objects_list < sprite_object, controller_spheres >
-{
-private:
+class controller_spheres : public objects_list<sprite_object, controller_spheres> {
+ private:
   Uint32 radius_horizontal_variation;
   Uint32 radius_vertical_variation;
   Uint32 radius_hinc_variation;
   Uint32 radius_vinc_variation;
   Uint32 radius_sphere_speed;
-public:
-    controller_spheres ();
-   ~controller_spheres ();
-  void initialize ();
-  void run ();
+
+ public:
+  controller_spheres();
+  ~controller_spheres();
+  void initialize();
+  void run();
 };
 #endif

@@ -1,6 +1,6 @@
 /**
  * @file supervisor.h
- * @brief Virtual class for all supervisors 
+ * @brief Virtual class for all supervisors
  * @date 2007-10-02
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
@@ -28,17 +28,16 @@
 #ifndef __SUPERVISOR__
 #define __SUPERVISOR__
 #include "../include/tecnoballz.h"
-class supervisor:public virtual tecnoballz
-  {
-  protected:
-    Uint32 next_phase;
+class supervisor : public virtual tecnoballz {
+ protected:
+  Uint32 next_phase;
 
-  public:
-    supervisor ();
-    virtual ~ supervisor () = 0;
-    void initialize ();
-    void release ();
-    virtual void first_init ();
-    virtual Uint32 main_loop ();
-  };
+ public:
+  supervisor();
+  virtual ~supervisor() = 0;
+  void initialize();
+  void release();
+  virtual void first_init();
+  virtual Uint32 main_loop();
+};
 #endif

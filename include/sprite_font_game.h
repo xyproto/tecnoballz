@@ -31,29 +31,32 @@
 class sprite_font_game;
 #include "../include/sprite_object.h"
 
-class sprite_font_game:public sprite_object
-  {
-    friend class controller_font_game;
+class sprite_font_game : public sprite_object {
+  friend class controller_font_game;
 
-  private:
-    /** Radius value from 0 to 511, index on a sinus table */
-    Uint32 current_radius;
-    /** Final y-coordinate */
-    Sint32 ycoord_current;
-    /** Final x-coordinate */
-    Sint32 xcoord_final;
-    /** X increase: 1, -1, or 0 */
-    Sint32 x_inc;
-    /** Y increase: -12 or -16 */
-    Sint32 y_inc;
-    /** Final y-coordinate */
-    Sint32 ycoord_final;
+ private:
+  /** Radius value from 0 to 511, index on a sinus table */
+  Uint32 current_radius;
+  /** Final y-coordinate */
+  Sint32 ycoord_current;
+  /** Final x-coordinate */
+  Sint32 xcoord_final;
+  /** X increase: 1, -1, or 0 */
+  Sint32 x_inc;
+  /** Y increase: -12 or -16 */
+  Sint32 y_inc;
+  /** Final y-coordinate */
+  Sint32 ycoord_final;
 
-  public:
-    sprite_font_game ();
-    ~sprite_font_game ();
-    void initialize (Uint32 radius, Sint32 x_stop, Sint32 y_start,
-                     Sint32 xinc, Sint32 yinc, Sint32 y_stop);
-    void move ();
-  };
+ public:
+  sprite_font_game();
+  ~sprite_font_game();
+  void initialize(Uint32 radius,
+                  Sint32 x_stop,
+                  Sint32 y_start,
+                  Sint32 xinc,
+                  Sint32 yinc,
+                  Sint32 y_stop);
+  void move();
+};
 #endif

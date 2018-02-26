@@ -1,12 +1,12 @@
-/** 
- * @file sprite_money.cc 
- * @brief The money sprite 
- * @date 2012-10-07 
+/**
+ * @file sprite_money.cc
+ * @brief The money sprite
+ * @date 2012-10-07
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,36 +30,30 @@
 /**
  * Create the money sprite
  */
-sprite_money::sprite_money ()
-{
-  clear_sprite_members ();
+sprite_money::sprite_money() {
+  clear_sprite_members();
   towards = 0;
   money_amount = 0;
   speed_of_moving = 0;
-  paddle = (sprite_paddle *) NULL;
+  paddle = (sprite_paddle*)NULL;
 }
 
 /**
  * Release the money sprite
  */
-sprite_money::~sprite_money ()
-{
-}
+sprite_money::~sprite_money() {}
 
-/** 
+/**
  * perform some initialization of members
  */
-void
-sprite_money::init_members ()
-{
-  right_panel_score* panel_score = right_panel_score::get_instance ();
-  init_coords_max_min (panel_score->get_width());
+void sprite_money::init_members() {
+  right_panel_score* panel_score = right_panel_score::get_instance();
+  init_coords_max_min(panel_score->get_width());
   frame_period = 5;
   frame_delay = 1;
 
   /* initialize multiplier of the value of the capsules of money  */
-  switch (current_player->get_area_number ())
-    {
+  switch (current_player->get_area_number()) {
     default:
       money_multiplier = 1;
       break;
@@ -70,7 +64,7 @@ sprite_money::init_members ()
     case 5:
       money_multiplier = 4;
       break;
-    }
+  }
 }
 
 /**
@@ -78,29 +72,25 @@ sprite_money::init_members ()
  * @param brick a pointer to the brick which touched by a ball
  * @return true if the sprite was enabled, otherwise false
  */
-bool sprite_money::enable_if_available (brick_redraw * brick)
-{
-  if (is_enabled)
-    {
-      return false;
-    }
-  init_money (brick->xcoord_collision, brick->ycoord_collision, brick->paddle);
+bool sprite_money::enable_if_available(brick_redraw* brick) {
+  if (is_enabled) {
+    return false;
+  }
+  init_money(brick->xcoord_collision, brick->ycoord_collision, brick->paddle);
   return true;
 }
 
 /**
- * Initialize a new capsule of money from a ship or a guardian 
+ * Initialize a new capsule of money from a ship or a guardian
  * @param ball a pointer to the ball sprite which destroyed
  *        the enemy ship or touched the guardian
  * @return true if the sprite was enabled, otherwise false
  */
-bool sprite_money::enable_if_available (sprite_ball * ball)
-{
-  if (is_enabled)
-    {
-      return false;
-    }
-  init_money (ball->x_coord, ball->y_coord, ball->paddle_touched);
+bool sprite_money::enable_if_available(sprite_ball* ball) {
+  if (is_enabled) {
+    return false;
+  }
+  init_money(ball->x_coord, ball->y_coord, ball->paddle_touched);
   return true;
 }
 
@@ -110,34 +100,29 @@ bool sprite_money::enable_if_available (sprite_ball * ball)
  *        destroyed the enemy ship
  * @return true if the sprite was enabled, otherwise false
  */
-bool sprite_money::enable_if_available (sprite_projectile * blast)
-{
-  if (is_enabled)
-    {
-      return false;
-    }
-  init_money (blast->x_coord, blast->y_coord, blast->paddle);
+bool sprite_money::enable_if_available(sprite_projectile* blast) {
+  if (is_enabled) {
+    return false;
+  }
+  init_money(blast->x_coord, blast->y_coord, blast->paddle);
   return true;
 }
 
-/** 
+/**
  * Initialize a new capsule of money
  * @param xcoord x coordinate of the money capsule
  * @param ycoord y coordinate of the money caspule
  * @parm pad pointer to the paddle sprite which goes the money caspule
  */
-void
-sprite_money::init_money (Uint32 xcoord, Uint32 ycoord, sprite_paddle * pad)
-{
+void sprite_money::init_money(Uint32 xcoord, Uint32 ycoord, sprite_paddle* pad) {
   is_enabled = true;
   x_coord = xcoord;
   y_coord = ycoord;
   paddle = pad;
   Uint32 value = random_counter & 0x003;
   random_counter += value;
-  towards = paddle->get_paddle_number ();
-  switch (value)
-    {
+  towards = paddle->get_paddle_number();
+  switch (value) {
     case 0:
       money_amount = 10 * money_multiplier;
       speed_of_moving = resolution;
@@ -151,97 +136,78 @@ sprite_money::init_money (Uint32 xcoord, Uint32 ycoord, sprite_paddle * pad)
       money_amount = 20 * money_multiplier;
       speed_of_moving = resolution * 2;
       break;
-    }
+  }
 }
 
 /**
  * Displacement and collision of the money in the bricks levels
  * @return the money amount collected
  */
-Uint32 sprite_money::move ()
-{
-  if (!is_enabled)
-    {
-      return 0;
-    }
-  switch (towards)
-    {
+Uint32 sprite_money::move() {
+  if (!is_enabled) {
+    return 0;
+  }
+  switch (towards) {
     case controller_paddles::BOTTOM_PADDLE:
       y_coord += speed_of_moving;
-      if (y_coord < y_maximum)
-        {
-          if (collision (paddle))
-            {
-              is_enabled = false;
-#ifndef SOUNDISOFF
-              audio->play_sound (handler_audio::COLLECT_MONEY);
-#endif
-              return (money_amount);
-            }
-        }
-      else
-        {
+      if (y_coord < y_maximum) {
+        if (collision(paddle)) {
           is_enabled = false;
+#ifndef SOUNDISOFF
+          audio->play_sound(handler_audio::COLLECT_MONEY);
+#endif
+          return (money_amount);
         }
+      } else {
+        is_enabled = false;
+      }
       break;
 
     case controller_paddles::RIGHT_PADDLE:
       x_coord += speed_of_moving;
-      if (x_coord < x_maximum)
-        {
-          if (collision (paddle))
-            {
-              is_enabled = false;
-#ifndef SOUNDISOFF
-              audio->play_sound (handler_audio::COLLECT_MONEY);
-#endif
-              return (money_amount);
-            }
-        }
-      else
-        {
+      if (x_coord < x_maximum) {
+        if (collision(paddle)) {
           is_enabled = false;
+#ifndef SOUNDISOFF
+          audio->play_sound(handler_audio::COLLECT_MONEY);
+#endif
+          return (money_amount);
         }
+      } else {
+        is_enabled = false;
+      }
       break;
 
     case controller_paddles::TOP_PADDLE:
       y_coord -= speed_of_moving;
-      if (y_coord > y_minimum)
-        {
-          if (collision (paddle))
-            {
-              is_enabled = false;
-#ifndef SOUNDISOFF
-              audio->play_sound (handler_audio::COLLECT_MONEY);
-#endif
-              return (money_amount);
-            }
-        }
-      else
-        {
+      if (y_coord > y_minimum) {
+        if (collision(paddle)) {
           is_enabled = false;
+#ifndef SOUNDISOFF
+          audio->play_sound(handler_audio::COLLECT_MONEY);
+#endif
+          return (money_amount);
         }
+      } else {
+        is_enabled = false;
+      }
       break;
 
     case controller_paddles::LEFT_PADDLE:
       x_coord -= speed_of_moving;
-      if (x_coord > x_minimum)
-        {
-          if (collision (paddle))
-            {
-              is_enabled = false;
-#ifndef SOUNDISOFF
-              audio->play_sound (handler_audio::COLLECT_MONEY);
-#endif
-              return (money_amount);
-            }
-        }
-      else
-        {
+      if (x_coord > x_minimum) {
+        if (collision(paddle)) {
           is_enabled = false;
+#ifndef SOUNDISOFF
+          audio->play_sound(handler_audio::COLLECT_MONEY);
+#endif
+          return (money_amount);
         }
+      } else {
+        is_enabled = false;
+      }
       break;
-    }
+  }
   return 0;
 }
 
@@ -249,25 +215,21 @@ Uint32 sprite_money::move ()
  * Displacement and collision of the money in the guards levels
  * @return the money amount collected
  */
-Uint32 sprite_money::move_bottom ()
-{
-  if (!is_enabled)
-    {
-      return 0;
-    }
+Uint32 sprite_money::move_bottom() {
+  if (!is_enabled) {
+    return 0;
+  }
   y_coord += speed_of_moving;
-  if (y_coord >= y_maximum)
-    {
-      is_enabled = false;
-      return 0;
-    }
-  if (!collision (paddle))
-    {
-      return 0;
-    }
+  if (y_coord >= y_maximum) {
+    is_enabled = false;
+    return 0;
+  }
+  if (!collision(paddle)) {
+    return 0;
+  }
   is_enabled = false;
 #ifndef SOUNDISOFF
-  audio->play_sound (handler_audio::COLLECT_MONEY);
+  audio->play_sound(handler_audio::COLLECT_MONEY);
 #endif
   return money_amount;
 }

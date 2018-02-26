@@ -1,6 +1,6 @@
 /**
  * @file controller_game_over.h
- * @brief Game Over controller 
+ * @brief Game Over controller
  * @created 2002-12-14
  * @date 2007-09-25
  * @copyright 1991-2016 TLK Games
@@ -31,37 +31,35 @@
 
 class controller_game_over;
 
-#include "../include/sprite_object.h"
 #include "../include/objects_list.h"
 #include "../include/sprite_display_scores.h"
+#include "../include/sprite_object.h"
 
-class controller_game_over:public objects_list < sprite_object,
-   controller_game_over >
-  {
-  private:
-    /** Phase number: 0, 1, 2 or 3 */
-    Uint32 move_phase;
-    /** Delay counter before next phase */
-    Uint32 next_phase_counter;
-    sprite_display_scores *sprite_high_score;
-    /** X offset of the chars */
-    Sint32 char_x_offset;
-    static const Sint32 SIZETSINUS = 200;
-    static const Sint32 sinus_over[SIZETSINUS];
-    static const Sint32 initial_coordinates[];
+class controller_game_over : public objects_list<sprite_object, controller_game_over> {
+ private:
+  /** Phase number: 0, 1, 2 or 3 */
+  Uint32 move_phase;
+  /** Delay counter before next phase */
+  Uint32 next_phase_counter;
+  sprite_display_scores* sprite_high_score;
+  /** X offset of the chars */
+  Sint32 char_x_offset;
+  static const Sint32 SIZETSINUS = 200;
+  static const Sint32 sinus_over[SIZETSINUS];
+  static const Sint32 initial_coordinates[];
 
-  private:
-    void displacement_01 ();
-    void displacement_02 ();
-    void displacement_03 ();
-    void displacement_04 ();
+ private:
+  void displacement_01();
+  void displacement_02();
+  void displacement_03();
+  void displacement_04();
 
-  public:
-    controller_game_over ();
-    ~controller_game_over ();
-    sprite_display_scores *get_sprite_high_score ();
-    void first_init (Uint32 x_offset = 0);
-    void enable_game_over (bool is_victory);
-    void run (bool is_victory = false);
-  };
+ public:
+  controller_game_over();
+  ~controller_game_over();
+  sprite_display_scores* get_sprite_high_score();
+  void first_init(Uint32 x_offset = 0);
+  void enable_game_over(bool is_victory);
+  void run(bool is_victory = false);
+};
 #endif

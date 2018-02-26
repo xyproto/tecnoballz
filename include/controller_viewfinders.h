@@ -1,12 +1,12 @@
-/** 
+/**
  * @file controller_viewfinders.h
- * @brief Paddles viewfinders controller 
+ * @brief Paddles viewfinders controller
  * @date 2007-02-18
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,23 +30,22 @@
 
 class controller_viewfinders;
 
+#include "../include/controller_paddles.h"
 #include "../include/objects_list.h"
 #include "../include/sprite_paddle.h"
-#include "../include/controller_paddles.h"
 
-class controller_viewfinders:public objects_list < sprite_object, controller_viewfinders >
-{
-private:
+class controller_viewfinders : public objects_list<sprite_object, controller_viewfinders> {
+ private:
   /** List of the paddles */
-  sprite_paddle ** paddles_list;
+  sprite_paddle** paddles_list;
   /** Number of paddles 1 to 4 */
   Uint32 num_of_paddles;
 
-public:
-    controller_viewfinders ();
-   ~controller_viewfinders ();
-  void initialize ();
-  void run ();
+ public:
+  controller_viewfinders();
+  ~controller_viewfinders();
+  void initialize();
+  void run();
 };
 
 #endif

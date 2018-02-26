@@ -1,12 +1,12 @@
-/** 
- * @file sprite_gigablitz.cc 
- * @brief The sprite of the Gigablitz 
+/**
+ * @file sprite_gigablitz.cc
+ * @brief The sprite of the Gigablitz
  * @date 2007-02-05
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,14 +30,11 @@
 /**
  * Create the Gigablitz sprite
  */
-sprite_gigablitz::sprite_gigablitz ()
-{
-  clear_sprite_members ();
+sprite_gigablitz::sprite_gigablitz() {
+  clear_sprite_members();
 }
 
 /**
  * Release the Gigablitz sprite
  */
-sprite_gigablitz::~sprite_gigablitz ()
-{
-}
+sprite_gigablitz::~sprite_gigablitz() {}

@@ -1,13 +1,13 @@
-/** 
+/**
  * @file sprite_brick.h
- * @brief The sprite of the brick 
+ * @brief The sprite of the brick
  * @created 2007-09-12
  * @date 2007-09-15
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,22 +31,21 @@
 
 class sprite_brick;
 
-#include "../include/sprite_object.h"
 #include "../include/objects_list.h"
-class sprite_brick:public sprite_object
-{
-private:
+#include "../include/sprite_object.h"
+class sprite_brick : public sprite_object {
+ private:
   /** Color of brick */
   Uint32 original_color;
   Uint32 current_color;
 
-public:
-  sprite_brick ();
-  ~sprite_brick ();
-  void update_image (Uint32 h_pos);
-  void set_color (Uint32 color); 
-  void touch ();
+ public:
+  sprite_brick();
+  ~sprite_brick();
+  void update_image(Uint32 h_pos);
+  void set_color(Uint32 color);
+  void touch();
   bool is_cycling();
-  virtual void draw ();
+  virtual void draw();
 };
 #endif

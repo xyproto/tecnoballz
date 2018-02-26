@@ -30,24 +30,20 @@
 
 class controller_ejectors;
 
-#include "../include/sprite_object.h"
-#include "../include/tecnoballz.h"
 #include "../include/sprite_ball.h"
 #include "../include/sprite_ejector.h"
+#include "../include/sprite_object.h"
+#include "../include/tecnoballz.h"
 
-class controller_ejectors:public objects_list < sprite_ejector,
-  controller_ejectors >
-{
-public:
-  typedef enum
-  {
+class controller_ejectors : public objects_list<sprite_ejector, controller_ejectors> {
+ public:
+  typedef enum {
     TOP_LEFT_EJECTOR,
     BOTTOM_LEFT_EJECTOR,
     BOTTOM_RIGHT_EJECTOR,
     TOP_RIGHT_EJECTOR,
     MAX_OF_EJECTORS
-  }
-  EJECTORS_ENUM;
+  } EJECTORS_ENUM;
 
   static const Sint32 EJECTOR0_BALL_OFFSETX = 10;
   static const Sint32 EJECTOR0_BALL_OFFSETY = 10;
@@ -58,16 +54,16 @@ public:
   static const Sint32 EJECTOR3_BALL_OFFSETX = 5;
   static const Sint32 EJECTOR3_BALL_OFFSETY = 10;
 
-private:
+ private:
   static const Uint32 COORD_EJECTOR_1 = 16;
   static const Uint32 COORD_EJECTOR_2 = 224;
 
-public:
-    controller_ejectors ();
-   ~controller_ejectors ();
-  void create_ejectors_sprites ();
-  void draw_shadow ();
-  void draw ();
-  sprite_ejector *get_ejector (Uint32 eject);
+ public:
+  controller_ejectors();
+  ~controller_ejectors();
+  void create_ejectors_sprites();
+  void draw_shadow();
+  void draw();
+  sprite_ejector* get_ejector(Uint32 eject);
 };
 #endif

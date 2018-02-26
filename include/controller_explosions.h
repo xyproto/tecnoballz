@@ -1,13 +1,13 @@
-/** 
+/**
  * @file controller_explosions.h
- * @brief Guardians explosions controller  
- * @created 2003-03-02 
+ * @brief Guardians explosions controller
+ * @created 2003-03-02
  * @date 2007-02-08
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -32,20 +32,18 @@
 class controller_explosions;
 
 #include "../include/list_sprites.h"
-#include "../include/sprite_object.h"
 #include "../include/objects_list.h"
+#include "../include/sprite_object.h"
 
-class controller_explosions:public objects_list < sprite_object, controller_explosions >
-{
+class controller_explosions : public objects_list<sprite_object, controller_explosions> {
+ public:
+  controller_explosions();
+  ~controller_explosions();
+  void create_explosions_list();
+  void add(Uint32 xcoord, Uint32 ycoord);
+  void play_animation();
 
-public:
-  controller_explosions ();
-  ~controller_explosions ();
-  void create_explosions_list ();
-  void add (Uint32 xcoord, Uint32 ycoord);
-  void play_animation ();
-
-private:
+ private:
   Uint32 sound_delay;
 };
 #endif

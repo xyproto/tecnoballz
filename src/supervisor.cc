@@ -1,12 +1,12 @@
-/** 
- * @file supervisor.cc 
- * @brief Virtual class for all supervisors 
+/**
+ * @file supervisor.cc
+ * @brief Virtual class for all supervisors
  * @date 2007-10-02
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,39 +30,28 @@
 /**
  * Create supervisor object
  */
-supervisor::supervisor ()
-{
-  initialize ();
+supervisor::supervisor() {
+  initialize();
 }
 
 /**
  * Release supervisor object
  */
-supervisor::~supervisor ()
-{
-  release ();
+supervisor::~supervisor() {
+  release();
 }
 
-void
-supervisor::initialize ()
-{
-  object_init ();
+void supervisor::initialize() {
+  object_init();
   next_phase = 0;
 }
 
-void
-supervisor::release ()
-{
-  object_free ();
+void supervisor::release() {
+  object_free();
 }
 
-void
-supervisor::first_init ()
-{
-}
+void supervisor::first_init() {}
 
-Uint32
-supervisor::main_loop ()
-{
+Uint32 supervisor::main_loop() {
   return MAIN_MENU;
 }

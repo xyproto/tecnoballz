@@ -1,12 +1,12 @@
-/** 
+/**
  * @file controller_font_menu.h
- * @brief Controller of the menu scroll text 
+ * @brief Controller of the menu scroll text
  * @date 2007-11-18
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,29 +30,27 @@
 
 #include "../include/objects_list.h"
 #include "../include/sprite_font_menu.h"
-class controller_font_menu:public objects_list < sprite_font_menu, controller_font_menu >
-{
-private:
+class controller_font_menu : public objects_list<sprite_font_menu, controller_font_menu> {
+ private:
   /** Numbers maximum characters */
   static const Uint32 MAX_OF_FONTS = 14;
   static char asciiToBob[128];
 
-private:
-  sprite_font_menu * characters_list[MAX_OF_FONTS + 2];
-  sprite_font_menu *objectLeft;
-  sprite_font_menu *objectRigh;
-  sprite_font_menu **object_ptr;
-  char *scroll_ptr;
+ private:
+  sprite_font_menu* characters_list[MAX_OF_FONTS + 2];
+  sprite_font_menu* objectLeft;
+  sprite_font_menu* objectRigh;
+  sprite_font_menu** object_ptr;
+  char* scroll_ptr;
   Sint32 offset_xx1;
   Sint32 offset_yy1;
   char* scrollText;
   char** scrolltexts;
 
-public:
-    controller_font_menu ();
-   ~controller_font_menu ();
-  void create_fontes_list ();
-  void move_chars ();
-
+ public:
+  controller_font_menu();
+  ~controller_font_menu();
+  void create_fontes_list();
+  void move_chars();
 };
 #endif

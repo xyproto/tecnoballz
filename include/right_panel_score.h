@@ -1,12 +1,12 @@
-/** 
+/**
  * @file right_panel_score.h
- * @brief The right panel score in the bricks levels 
- * @date 2012-10-07 
+ * @brief The right panel score in the bricks levels
+ * @date 2012-10-07
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,15 +31,14 @@
 class right_panel_score;
 
 #include "../include/bitmap_data.h"
-#include "../include/display_text_bitmap.h"
-#include "../include/handler_players.h"
-#include "../include/handler_keyboard.h"
-#include "../include/controller_gigablitz.h"
 #include "../include/controller_balls.h"
+#include "../include/controller_gigablitz.h"
+#include "../include/display_text_bitmap.h"
+#include "../include/handler_keyboard.h"
+#include "../include/handler_players.h"
 
-class right_panel_score:public display_text_bitmap
-{
-private:
+class right_panel_score : public display_text_bitmap {
+ private:
   static right_panel_score* panel_score_singleton;
 
   static const Uint32 DELAY_GIGABLITZ_COUNTDOWN = 10;
@@ -47,7 +46,7 @@ private:
   static const Uint32 GAUGE_XCOORD = 526 / 2;
   static const Uint32 GAUGE_YCOORD = 420 / 2;
   /* static const Uint32 GAUGE_WIDTH = 10 / 2; */
-  static const Uint32 AREA_NUM_XCOORD = 264; 
+  static const Uint32 AREA_NUM_XCOORD = 264;
   static const Uint32 AREA_NUM_YCOORD = 153;
   static const Uint32 LEVEL_NUM_XCOORD = 296;
   static const Uint32 LEVEL_NUM_YCOORD = 153;
@@ -71,8 +70,8 @@ private:
   Sint32 flip_white;
   /** Pointer to the pixel data in the game offscreen
    * of the gigablitz gauge */
-  char *gauge_pixel;
-  /** Countdown berfore Gigablitz launch */ 
+  char* gauge_pixel;
+  /** Countdown berfore Gigablitz launch */
   Uint32 gigablitz_countdown;
   Uint32 delay_gigablitz_countdown;
   /** Height of the gigablitz gauge in pixels */
@@ -82,22 +81,22 @@ private:
   static unsigned char temoinCol1[GAUGE_HEIGHT];
   static unsigned char temoinCol2[GAUGE_HEIGHT * 2];
 
+ private:
+  right_panel_score();
 
-private:
-    right_panel_score ();
-public:
-   ~right_panel_score ();
-  static right_panel_score *get_instance ();
-  void first_init ();
-  void text_refresh ();
-  void decrease_bricks_counter (Uint32 dec);
-  Uint32 get_bricks_counter ();
-  void set_bricks_counter  (Uint32 counter);
-  void draw_gigablizt_gauge ();
-  void reset_gigablitz_countdown ();
-  Uint32 get_width ();
-private:
-  void draw_background ();
+ public:
+  ~right_panel_score();
+  static right_panel_score* get_instance();
+  void first_init();
+  void text_refresh();
+  void decrease_bricks_counter(Uint32 dec);
+  Uint32 get_bricks_counter();
+  void set_bricks_counter(Uint32 counter);
+  void draw_gigablizt_gauge();
+  void reset_gigablitz_countdown();
+  Uint32 get_width();
 
+ private:
+  void draw_background();
 };
 #endif

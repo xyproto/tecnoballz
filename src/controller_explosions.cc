@@ -1,13 +1,13 @@
-/** 
- * @file controller_explosions.cc 
- * @brief Explosions controller  
- * @created 2003-03-02 
+/**
+ * @file controller_explosions.cc
+ * @brief Explosions controller
+ * @created 2003-03-02
  * @date 2007-09-26
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -32,9 +32,8 @@
 /**
  * Create the explosions controller
  */
-controller_explosions::controller_explosions ()
-{
-  littleInit ();
+controller_explosions::controller_explosions() {
+  littleInit();
   max_of_sprites = 28;
   sprites_have_shades = false;
   sound_delay = 0;
@@ -44,60 +43,54 @@ controller_explosions::controller_explosions ()
 /**
  * Release the explosions controller
  */
-controller_explosions::~controller_explosions ()
-{
-  release_sprites_list ();
+controller_explosions::~controller_explosions() {
+  release_sprites_list();
 }
 
 /**
  * Create the list of explosions sprites
  */
-void
-controller_explosions::create_explosions_list ()
-{
+void controller_explosions::create_explosions_list() {
+  alloc_sprites_list();
 
-  alloc_sprites_list ();
-
-  sprite_object *explosion_1 = new sprite_object ();
-  explosion_1->set_object_pos (0);
-  explosion_1->create_sprite (sprite_object::EXPLOSION_1, sprites_bitmap, false);
+  sprite_object* explosion_1 = new sprite_object();
+  explosion_1->set_object_pos(0);
+  explosion_1->create_sprite(sprite_object::EXPLOSION_1, sprites_bitmap, false);
   sprites_list[0] = explosion_1;
-  sprites->add (explosion_1);
+  sprites->add(explosion_1);
 
-  sprite_object *explosion_2 = new sprite_object ();
-  explosion_2->set_object_pos (1);
-  explosion_2->create_sprite (sprite_object::EXPLOSION_2, sprites_bitmap, false);
+  sprite_object* explosion_2 = new sprite_object();
+  explosion_2->set_object_pos(1);
+  explosion_2->create_sprite(sprite_object::EXPLOSION_2, sprites_bitmap, false);
   sprites_list[1] = explosion_2;
-  sprites->add (explosion_2);
+  sprites->add(explosion_2);
 
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_object *explosion = new sprite_object ();
-      explosion->set_object_pos (i);
-      explosion_1->duplicate_to (explosion);
-      sprites_list[i] = explosion;
-      sprites->add (explosion);
-      explosion = explosion_1;
-      explosion_1 = explosion_2;
-      explosion_2 = explosion;
-    }
- 
+  for (Uint32 i = 0; i < max_of_sprites; i++) {
+    sprite_object* explosion = new sprite_object();
+    explosion->set_object_pos(i);
+    explosion_1->duplicate_to(explosion);
+    sprites_list[i] = explosion;
+    sprites->add(explosion);
+    explosion = explosion_1;
+    explosion_1 = explosion_2;
+    explosion_2 = explosion;
+  }
 
-/*
-  Uint32 bobn1 = BOB_EXPLO1;
-  Uint32 bobn2 = BOB_EXPLO2;
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_object *explosion = new sprite_object ();
-      explosion->set_object_pos (i);
-      explosion->create_sprite (bobn1, sprites_bitmap, 0);
-      Sint32 bobnu = bobn2;
-      bobn2 = bobn1;
-      bobn1 = bobnu;
-      sprites_list[i] = explosion;
-      sprites->add (explosion);
-    }
-    */
+  /*
+    Uint32 bobn1 = BOB_EXPLO1;
+    Uint32 bobn2 = BOB_EXPLO2;
+    for (Uint32 i = 0; i < max_of_sprites; i++)
+      {
+        sprite_object *explosion = new sprite_object ();
+        explosion->set_object_pos (i);
+        explosion->create_sprite (bobn1, sprites_bitmap, 0);
+        Sint32 bobnu = bobn2;
+        bobn2 = bobn1;
+        bobn1 = bobnu;
+        sprites_list[i] = explosion;
+        sprites->add (explosion);
+      }
+      */
 }
 
 /**
@@ -105,46 +98,37 @@ controller_explosions::create_explosions_list ()
  * @param xcoord x coordinate of the explosion
  * @param ycoord y coordinate of the explosion
  */
-void
-controller_explosions::add (Uint32 xcoord, Uint32 ycoord)
-{
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_object *explosion = sprites_list[i];
-      if (explosion->is_enabled)
-        {
-          continue;
-        }
-          if (++sound_delay > 4)
-            {
-              sound_delay = 0;
-#ifndef SOUNDISOFF
-              audio->play_sound (handler_audio::BIG_EXPLOSION);
-#endif
-            }
-          explosion->is_enabled = true;
-          explosion->x_coord = xcoord - (explosion->sprite_width / 2);
-          explosion->y_coord = ycoord - (explosion->sprite_height / 2);
-          explosion->frame_index = explosion->frame_index_min;
-          explosion->frame_period = 4 + (random_counter & 7);
-          explosion->frame_delay = explosion->frame_period;
-          explosion->set_image ();
-          return;
+void controller_explosions::add(Uint32 xcoord, Uint32 ycoord) {
+  for (Uint32 i = 0; i < max_of_sprites; i++) {
+    sprite_object* explosion = sprites_list[i];
+    if (explosion->is_enabled) {
+      continue;
     }
+    if (++sound_delay > 4) {
+      sound_delay = 0;
+#ifndef SOUNDISOFF
+      audio->play_sound(handler_audio::BIG_EXPLOSION);
+#endif
+    }
+    explosion->is_enabled = true;
+    explosion->x_coord = xcoord - (explosion->sprite_width / 2);
+    explosion->y_coord = ycoord - (explosion->sprite_height / 2);
+    explosion->frame_index = explosion->frame_index_min;
+    explosion->frame_period = 4 + (random_counter & 7);
+    explosion->frame_delay = explosion->frame_period;
+    explosion->set_image();
+    return;
+  }
 }
 
 /**
  * Animation of all explisions
- */ 
-void
-controller_explosions::play_animation ()
-{
-  for (Uint32 i = 0; i < max_of_sprites; i++)
-    {
-      sprite_object *explosion = sprites_list[i];
-      if (explosion->is_enabled)
-        {
-          explosion->play_animation_once ();
-        }
+ */
+void controller_explosions::play_animation() {
+  for (Uint32 i = 0; i < max_of_sprites; i++) {
+    sprite_object* explosion = sprites_list[i];
+    if (explosion->is_enabled) {
+      explosion->play_animation_once();
     }
+  }
 }

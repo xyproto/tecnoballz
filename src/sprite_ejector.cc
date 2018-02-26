@@ -31,31 +31,25 @@
 /**
  * Create the object
  */
-sprite_ejector::sprite_ejector (Sint32 ball_offx, Sint32 ball_offy)
-{
+sprite_ejector::sprite_ejector(Sint32 ball_offx, Sint32 ball_offy) {
   ball_offsetx = ball_offx * resolution;
   ball_offsety = ball_offy * resolution;
-  if (resolution == 2)
-    {
-      ball_offsetx++;
-      ball_offsety++;
-    }
-  clear_sprite_members ();
+  if (resolution == 2) {
+    ball_offsetx++;
+    ball_offsety++;
+  }
+  clear_sprite_members();
 }
 
 /**
  * Release the object
  */
-sprite_ejector::~sprite_ejector ()
-{
-}
+sprite_ejector::~sprite_ejector() {}
 
 /**
  * Places the ball on the ejector
  * @param ball pointer to sprite_ball object
  */
-void
-sprite_ejector::stick (sprite_ball * ball)
-{
-  ball->pull (this, ball_offsetx, ball_offsety);
+void sprite_ejector::stick(sprite_ball* ball) {
+  ball->pull(this, ball_offsetx, ball_offsety);
 }

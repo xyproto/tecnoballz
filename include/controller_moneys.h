@@ -1,12 +1,12 @@
-/** 
+/**
  * @file controller_moneys.h
- * @brief Moneys controller 
+ * @brief Moneys controller
  * @date 2007-04-13
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,36 +30,34 @@
 
 class controller_moneys;
 
+#include "../include/controller_indicators.h"
+#include "../include/handler_display.h"
 #include "../include/list_sprites.h"
 #include "../include/objects_list.h"
-#include "../include/handler_display.h"
 #include "../include/right_panel_score.h"
-#include "../include/sprite_money.h"
-#include "../include/right_panel_score.h"
-#include "../include/supervisor_bricks_level.h"
-#include "../include/controller_indicators.h"
 #include "../include/sprite_ball.h"
+#include "../include/sprite_money.h"
+#include "../include/supervisor_bricks_level.h"
 
-class controller_moneys:public objects_list < sprite_money, controller_moneys >
-{
-private:
+class controller_moneys : public objects_list<sprite_money, controller_moneys> {
+ private:
   /** time delay before sending a new money capsule */
   Uint32 send_delay;
   /** delay counter before sending a new money capsule */
   Uint32 delay_count;
-  right_panel_score *ptbarreScr;
-  controller_indicators *ptPrntmney;
+  right_panel_score* ptbarreScr;
+  controller_indicators* ptPrntmney;
 
-public:
-    controller_moneys ();
-   ~controller_moneys ();
-  void initialize (Uint32 delay, right_panel_score * score, controller_indicators * money);
-  void initialize (Uint32 delay, controller_indicators * money);
-  void send_money_from_brick (brick_redraw * briPT);
-  void send_money (sprite_ball * ball);
-  void send_money (sprite_projectile * blast);
-  void send_money_from_guardian (sprite_ball * ball);
-  void move ();
-  void move_bottom ();
+ public:
+  controller_moneys();
+  ~controller_moneys();
+  void initialize(Uint32 delay, right_panel_score* score, controller_indicators* money);
+  void initialize(Uint32 delay, controller_indicators* money);
+  void send_money_from_brick(brick_redraw* briPT);
+  void send_money(sprite_ball* ball);
+  void send_money(sprite_projectile* blast);
+  void send_money_from_guardian(sprite_ball* ball);
+  void move();
+  void move_bottom();
 };
 #endif

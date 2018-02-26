@@ -26,8 +26,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-#include "../include/tecnoballz.h"
 #include "../include/offscreen_surface.h"
+#include "../include/tecnoballz.h"
 
 /**
  * Create the offscreen surface object
@@ -36,27 +36,22 @@
  * @param depth number of bits per pixel: 8, 16, or 24
  * @param voffset
  */
-offscreen_surface::offscreen_surface (Uint32 w, Uint32 h, Uint32 depth,
-                                      Uint32 voffset)
-{
+offscreen_surface::offscreen_surface(Uint32 w, Uint32 h, Uint32 depth, Uint32 voffset) {
   vertical_offset = voffset;
-  create_surface (w, h, depth);
-  pixel_data = (char *) surface->pixels + surface->pitch * vertical_offset;
+  create_surface(w, h, depth);
+  pixel_data = (char*)surface->pixels + surface->pitch * vertical_offset;
 }
 
 /**
  * Destroy the offscreen surface object
  */
-offscreen_surface::~offscreen_surface ()
-{
-}
+offscreen_surface::~offscreen_surface() {}
 
 /**
  * Get the vertical offset
  * @return vertical offset
  */
-Uint32 offscreen_surface::get_vertical_offset ()
-{
+Uint32 offscreen_surface::get_vertical_offset() {
   return vertical_offset;
 }
 
@@ -64,44 +59,33 @@ Uint32 offscreen_surface::get_vertical_offset ()
  * Perform a blit from the source surface to the destination surface
  * @param offscreen pointer to a offscreen surface object
  */
-void
-offscreen_surface::blit_to_surface (offscreen_surface * offscreen)
-{
-  SDL_Surface *surface_dest = offscreen->get_surface ();
-  SDL_Rect rect =
-  {
-    0, (Sint16) vertical_offset, (Uint16) surface->w,
-    (Uint16) (surface->h - vertical_offset)
-  };
-  if (SDL_BlitSurface (surface, &rect, surface_dest, &rect) < 0)
-    {
-      std::cerr << "(!)offscreen_surface::blit_to_surface(x=0, y=)" <<
-                vertical_offset << ", w=" << surface->w << " h=" <<
-                surface->h - vertical_offset <<
-                "SDL_BlitSurface() return " << SDL_GetError () << std::endl;
-    }
+void offscreen_surface::blit_to_surface(offscreen_surface* offscreen) {
+  SDL_Surface* surface_dest = offscreen->get_surface();
+  SDL_Rect rect = {0, (Sint16)vertical_offset, (Uint16)surface->w,
+                   (Uint16)(surface->h - vertical_offset)};
+  if (SDL_BlitSurface(surface, &rect, surface_dest, &rect) < 0) {
+    std::cerr << "(!)offscreen_surface::blit_to_surface(x=0, y=)" << vertical_offset
+              << ", w=" << surface->w << " h=" << surface->h - vertical_offset
+              << "SDL_BlitSurface() return " << SDL_GetError() << std::endl;
+  }
 }
 
 /**
  * Perform a blit from the source surface to the destination surface
  * @param offscreen pointer to a offscreen surface object
  */
-void
-offscreen_surface::blit_to_surface (offscreen_surface * offscreen,
-                                    Uint32 xcoord, Uint32 ycoord,
-                                    Uint32 width, Uint32 height)
-{
-  SDL_Surface *surface_dest = offscreen->get_surface ();
-  SDL_Rect rect =
-  {
-    (Sint16) xcoord, (Sint16) (ycoord + vertical_offset), (Uint16) width,
-    (Uint16) height
-  };
-  if (SDL_BlitSurface (surface, &rect, surface_dest, &rect) < 0)
-    {
-      std::cerr << "(!)offscreen_surface::blit_to_surface() " <<
-                "SDL_BlitSurface() return " << SDL_GetError () << std::endl;
-    }
+void offscreen_surface::blit_to_surface(offscreen_surface* offscreen,
+                                        Uint32 xcoord,
+                                        Uint32 ycoord,
+                                        Uint32 width,
+                                        Uint32 height) {
+  SDL_Surface* surface_dest = offscreen->get_surface();
+  SDL_Rect rect = {(Sint16)xcoord, (Sint16)(ycoord + vertical_offset), (Uint16)width,
+                   (Uint16)height};
+  if (SDL_BlitSurface(surface, &rect, surface_dest, &rect) < 0) {
+    std::cerr << "(!)offscreen_surface::blit_to_surface() "
+              << "SDL_BlitSurface() return " << SDL_GetError() << std::endl;
+  }
 }
 
 /**
@@ -114,28 +98,24 @@ offscreen_surface::blit_to_surface (offscreen_surface * offscreen,
  * @param w the width in pixels to copy
  * @param h the height in pixels to copy
  */
-void
-offscreen_surface::blit_to_surface (offscreen_surface * offscreen, Uint32 x1,
-                                    Uint32 y1, Uint32 x2, Uint32 y2, Uint32 w,
-                                    Uint32 h)
-{
-  dynamic_cast < surface_sdl * >(this)->blit_to_surface (offscreen,
-      x1, y1,
-      x2,
-      y2 + vertical_offset,
-      w, h);
+void offscreen_surface::blit_to_surface(offscreen_surface* offscreen,
+                                        Uint32 x1,
+                                        Uint32 y1,
+                                        Uint32 x2,
+                                        Uint32 y2,
+                                        Uint32 w,
+                                        Uint32 h) {
+  dynamic_cast<surface_sdl*>(this)->blit_to_surface(offscreen, x1, y1, x2, y2 + vertical_offset, w,
+                                                    h);
 }
 
 /**
  * Clear surface
  * @param color pixel color value
  */
-void
-offscreen_surface::clear (Uint32 color)
-{
-  dynamic_cast < surface_sdl * >(this)->clear (color, 0, vertical_offset,
-      surface->w,
-      surface->h - vertical_offset);
+void offscreen_surface::clear(Uint32 color) {
+  dynamic_cast<surface_sdl*>(this)->clear(color, 0, vertical_offset, surface->w,
+                                          surface->h - vertical_offset);
 }
 
 /**
@@ -146,13 +126,8 @@ offscreen_surface::clear (Uint32 color)
  * @param w the width in pixels to clear
  * @param h the height in pixels to clear
  */
-void
-offscreen_surface::clear (Uint32 color, Uint32 xcoord, Uint32 ycoord,
-                          Uint32 w, Uint32 h)
-{
-  dynamic_cast < surface_sdl * >(this)->clear (color, xcoord,
-      ycoord + vertical_offset, w,
-      h);
+void offscreen_surface::clear(Uint32 color, Uint32 xcoord, Uint32 ycoord, Uint32 w, Uint32 h) {
+  dynamic_cast<surface_sdl*>(this)->clear(color, xcoord, ycoord + vertical_offset, w, h);
 }
 
 /**
@@ -165,13 +140,14 @@ offscreen_surface::clear (Uint32 color, Uint32 xcoord, Uint32 ycoord,
  * @param w the width in pixels to copy
  * @param h the height in pixels to copy
  */
-void
-offscreen_surface::blit_surface (surface_sdl * dest, Uint32 x1, Uint32 y1,
-                                 Uint32 x2, Uint32 y2, Uint32 w, Uint32 h)
-{
-  dynamic_cast < surface_sdl * >(this)->blit_surface (dest, x1, y1, x2,
-      y2 + vertical_offset, w,
-      h);
+void offscreen_surface::blit_surface(surface_sdl* dest,
+                                     Uint32 x1,
+                                     Uint32 y1,
+                                     Uint32 x2,
+                                     Uint32 y2,
+                                     Uint32 w,
+                                     Uint32 h) {
+  dynamic_cast<surface_sdl*>(this)->blit_surface(dest, x1, y1, x2, y2 + vertical_offset, w, h);
 }
 
 /**
@@ -195,12 +171,6 @@ offscreen_surface::draw_text (display_text_bitmap * display_text,
  * @param h height of the destination surface
  * @return a pointer to the new surface sdl object
  */
-surface_sdl *
-offscreen_surface::cut_to_surface (Sint32 xcoord, Sint32 ycoord, Uint32 w,
-                                   Uint32 h)
-{
-  return dynamic_cast < surface_sdl * >(this)->cut_to_surface (xcoord,
-         ycoord +
-         vertical_offset,
-         w, h);
+surface_sdl* offscreen_surface::cut_to_surface(Sint32 xcoord, Sint32 ycoord, Uint32 w, Uint32 h) {
+  return dynamic_cast<surface_sdl*>(this)->cut_to_surface(xcoord, ycoord + vertical_offset, w, h);
 }

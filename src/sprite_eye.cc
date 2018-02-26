@@ -1,6 +1,6 @@
 /**
- * @file sprite_eye.cc 
- * @brief The sprite of the eye used in bricks level 
+ * @file sprite_eye.cc
+ * @brief The sprite of the eye used in bricks level
  * @created 2004-09-17
  * @date 2007-09-12
  * @copyright 1991-2016 TLK Games
@@ -31,14 +31,11 @@
 /**
  * Create the object
  */
-sprite_eye::sprite_eye()
-{
+sprite_eye::sprite_eye() {
   clear_sprite_members();
 }
 
 /**
  * Release the object
  */
-sprite_eye::~sprite_eye()
-{
-}
+sprite_eye::~sprite_eye() {}

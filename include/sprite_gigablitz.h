@@ -1,12 +1,12 @@
-/** 
+/**
  * @file sprite_gigablitz.h
- * @brief The sprite of the Gigablitz 
+ * @brief The sprite of the Gigablitz
  * @date 2007-02-05
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,14 +30,12 @@
 
 class sprite_gigablitz;
 
-#include "../include/sprite_object.h"
 #include "../include/objects_list.h"
-class sprite_gigablitz:public sprite_object
-{
-private:
-
-public:
-  sprite_gigablitz ();
-  ~sprite_gigablitz ();
+#include "../include/sprite_object.h"
+class sprite_gigablitz : public sprite_object {
+ private:
+ public:
+  sprite_gigablitz();
+  ~sprite_gigablitz();
 };
 #endif

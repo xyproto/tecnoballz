@@ -1,12 +1,12 @@
-/** 
+/**
  * @file sprite_paddle.h
- * @brief A paddle sprite 
+ * @brief A paddle sprite
  * @date 2007-10-23
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,38 +30,27 @@
 
 class sprite_paddle;
 
-#include "../include/sprite_object.h"
-#include "../include/sprite_ball.h"
-#include "../include/controller_projectiles.h"
 #include "../include/bitmap_data.h"
-#include "../include/sprite_bullet.h"
 #include "../include/controller_gigablitz.h"
+#include "../include/controller_projectiles.h"
+#include "../include/sprite_ball.h"
+#include "../include/sprite_bullet.h"
+#include "../include/sprite_object.h"
 
-class sprite_paddle:public sprite_object
-{
+class sprite_paddle : public sprite_object {
   friend class controller_paddles;
   friend class controller_balls;
   friend class controller_projectiles;
   friend class sprite_bullet;
   friend class controller_viewfinders;
   friend class controller_gigablitz;
-public:
-  typedef enum
-   {
-     NOT_OWN_GUN,
-     OWN_GUN,
-     FIRE = 3
-   } FIRE_PADDLE_STATUS;
 
-   typedef enum 
-   {
-    NOT_STICKY_PADDLE,
-    FREE_STICKY_PADDLE,
-    BUSY_STICKY_PADDLE
-   } STICKY_PADDLE_STATUS;
+ public:
+  typedef enum { NOT_OWN_GUN, OWN_GUN, FIRE = 3 } FIRE_PADDLE_STATUS;
 
+  typedef enum { NOT_STICKY_PADDLE, FREE_STICKY_PADDLE, BUSY_STICKY_PADDLE } STICKY_PADDLE_STATUS;
 
-private:
+ private:
   /** Paddle is enabled if the counter is greater than zero */
   Uint32 enable_counter;
   /** True if the paddle is vertical, otherwise horizontal */
@@ -82,13 +71,13 @@ private:
   /** Stick paddle state: NOT_STICKY_PADDLE, FREE_STICKY_PADDLE, or
    * BUSY_STICKY_PADDLE */
   Uint32 sticky_state;
-  const Sint32 **rebonds_Ga;    //ball rebounds table (move on the left)
-  const Sint32 **rebonds_Dr;    //ball rebounds table (move on the right)
+  const Sint32** rebonds_Ga;  // ball rebounds table (move on the left)
+  const Sint32** rebonds_Dr;  // ball rebounds table (move on the right)
   /** Current directions used for bounce a ball */
-  const Sint32 *current_bounces;
-  Sint32 *direct_tab;           // table direction si la balle collee
+  const Sint32* current_bounces;
+  Sint32* direct_tab;  // table direction si la balle collee
   /** Current stuck ball, NULL if not */
-  sprite_ball *stuck_ball;
+  sprite_ball* stuck_ball;
   /** If true the paddle touched a ball */
   bool is_hit_ball;
   /** Paddle is invinciblei f  the counter is greater than zero
@@ -97,7 +86,7 @@ private:
   /** Counter used to blink the padde when it is invincible */
   Sint32 blink_counter;
   /** Used for fire power 1 or fire power 2 */
-  controller_projectiles *projectiles;
+  controller_projectiles* projectiles;
   /** Used to increase x-coord of a projectile */
   Sint32 projectile_xinc0;
   /** Used to increase y-coord of a projectile */
@@ -119,26 +108,26 @@ private:
   /** x-offset used for the fire 6 */
   Sint32 projectile_yoffset;
 
-public:
-    sprite_paddle (bool has_projectiles = true);
-   ~sprite_paddle ();
-  void create_projectiles_list ();
-  void fire_projectiles ();
-  void move_projectiles ();
-  void enable_if_ok (bool is_team, Sint32 size, Uint32 counter);
-  void set_width (Uint32 size);
-  void set_height (Uint32 h);
-  void select_image (Uint32 size);
-  void select_image ();
-  Uint32 get_paddle_number ();
-  void set_glue ();
-  void set_fire_1 ();
-  void set_fire_2 ();
-  void release_ball ();
-  void stick_ball (sprite_ball * ball);
-  Uint32 get_length ();
-  bool is_invincible ();
-  void set_invincibility (Sint32 delay);
-  void blink ();
+ public:
+  sprite_paddle(bool has_projectiles = true);
+  ~sprite_paddle();
+  void create_projectiles_list();
+  void fire_projectiles();
+  void move_projectiles();
+  void enable_if_ok(bool is_team, Sint32 size, Uint32 counter);
+  void set_width(Uint32 size);
+  void set_height(Uint32 h);
+  void select_image(Uint32 size);
+  void select_image();
+  Uint32 get_paddle_number();
+  void set_glue();
+  void set_fire_1();
+  void set_fire_2();
+  void release_ball();
+  void stick_ball(sprite_ball* ball);
+  Uint32 get_length();
+  bool is_invincible();
+  void set_invincibility(Sint32 delay);
+  void blink();
 };
 #endif

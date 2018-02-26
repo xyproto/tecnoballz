@@ -1,12 +1,12 @@
-/** 
- * @file sprite_font_menu.cc 
- * @brief The fonte sprite used in the main menu 
+/**
+ * @file sprite_font_menu.cc
+ * @brief The fonte sprite used in the main menu
  * @date 2007-02-05
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,14 +30,11 @@
 /**
  * Create the fonte menu sprite
  */
-sprite_font_menu::sprite_font_menu ()
-{
-  clear_sprite_members ();
+sprite_font_menu::sprite_font_menu() {
+  clear_sprite_members();
 }
 
 /**
  * Release the fonte menu sprite
  */
-sprite_font_menu::~sprite_font_menu ()
-{
-}
+sprite_font_menu::~sprite_font_menu() {}

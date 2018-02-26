@@ -1,4 +1,4 @@
-/** 
+/**
  * @file tilesmap_scrolling.h
  * @brief Vertical scrolling tiles map in the main menu
  *        and the guardians levels
@@ -7,7 +7,7 @@
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -31,36 +31,27 @@
 
 class tilesmap_scrolling;
 
-#include "../include/handler_display.h"
 #include "../include/bitmap_data.h"
-#include "../include/tecnoballz.h"
+#include "../include/handler_display.h"
 #include "../include/supervisor_map_editor.h"
+#include "../include/tecnoballz.h"
 
-class tilesmap_scrolling:public virtual tecnoballz
-{
+class tilesmap_scrolling : public virtual tecnoballz {
   friend class supervisor_map_editor;
 
-public:
-  typedef enum
-    {
-      MAP_GUARDIANS,
-      MAP_MENU,
-      MAP_CONGRATULATIONS 
-    }
-  MAPS_ENUM;
+ public:
+  typedef enum { MAP_GUARDIANS, MAP_MENU, MAP_CONGRATULATIONS } MAPS_ENUM;
   /** Number of tiles per row in the map */
   static const Uint32 MAP_WIDTH = 20;
   /** Number of tiles per column in the map */
   static const Uint32 MAP_HEIGHT = 273;
-  typedef enum
-    {
-      TILES_COLOR_GUARDIANS,
-      TILES_COLOR_MENU,
-      TILES_COLOR_CONGRATULATIONS
-    }
-    TILES_COLOR;
+  typedef enum {
+    TILES_COLOR_GUARDIANS,
+    TILES_COLOR_MENU,
+    TILES_COLOR_CONGRATULATIONS
+  } TILES_COLOR;
 
-private:
+ private:
   bool is_40_columns;
   Uint32 tileset_width;
   Uint32 tile_width;
@@ -70,31 +61,31 @@ private:
   /** Number of tiles per row at screen */
   Uint32 tiles_per_row;
   /** The map of tiles */
-  Uint16 *map_tiles;
+  Uint16* map_tiles;
   /** Fist line visible of the  map of tiles */
-  Uint16 *map_top_screen;
+  Uint16* map_top_screen;
   Sint32 y_coord;
   /** Tileset bimap */
-  bitmap_data *tiles_bitmap;
+  bitmap_data* tiles_bitmap;
   /** Number of differents tiles in the bitmap */
   Uint32 number_of_different_tiles;
   static const unsigned char colors_map[48];
 
-public:
-    tilesmap_scrolling ();
-   ~tilesmap_scrolling ();
-  bitmap_data *get_bitmap ();
-  void initialize (Uint32 color_id = TILES_COLOR_GUARDIANS, Uint32 map_id = 0);
-  Uint32 get_tiles_width ();
-  Sint32 get_y_coord ();
+ public:
+  tilesmap_scrolling();
+  ~tilesmap_scrolling();
+  bitmap_data* get_bitmap();
+  void initialize(Uint32 color_id = TILES_COLOR_GUARDIANS, Uint32 map_id = 0);
+  Uint32 get_tiles_width();
+  Sint32 get_y_coord();
   Uint32 get_map_width();
-  void enable_palette (Uint32 color_id = 0);
-  void switch_map (Uint32 color_id, Uint32 map_id);
-  void scroll (Sint32 index = 0);
-  bitmap_data* alloc_brush(Uint16 *map, Uint32 num_of_cols, Uint32 num_of_lines);
+  void enable_palette(Uint32 color_id = 0);
+  void switch_map(Uint32 color_id, Uint32 map_id);
+  void scroll(Sint32 index = 0);
+  bitmap_data* alloc_brush(Uint16* map, Uint32 num_of_cols, Uint32 num_of_lines);
 
-private:
-  void draw ();
-  void load_map (Uint32 edmap = 0);
+ private:
+  void draw();
+  void load_map(Uint32 edmap = 0);
 };
 #endif

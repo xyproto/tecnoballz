@@ -25,7 +25,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
-*/
+ */
 #ifndef __HANDLER_HIGH_SCORE__
 #define __HANDLER_HIGH_SCORE__
 
@@ -33,40 +33,39 @@ class handler_high_score;
 
 #include "../include/tecnoballz.h"
 
-typedef struct
-  {
-    char player_name[8];
-    Uint32 value;
-    Uint32 area_number;
-    Uint32 level_number;
-  } player_score;
+typedef struct {
+  char player_name[8];
+  Uint32 value;
+  Uint32 area_number;
+  Uint32 level_number;
+} player_score;
 
-class handler_high_score:public virtual tecnoballz
-  {
-  public:
-    static const Uint32 MAX_OF_HIGH_SCORES = 10;
+class handler_high_score : public virtual tecnoballz {
+ public:
+  static const Uint32 MAX_OF_HIGH_SCORES = 10;
 
-  private:
-    static handler_high_score *high_score_singleton;
-    player_score ** scores_tables;
+ private:
+  static handler_high_score* high_score_singleton;
+  player_score** scores_tables;
 
-  private:
-    Uint32 scores_table_size;
-    bool is_player_ranked (char *playename, Uint32 score_value,
-                           Uint32 level_num, Uint32 area_num);
-    void sort_scores ();
-    bool load_high_score ();
-    void save_high_score ();
-    Uint32 calculate_checksum (Uint32 * addr, Uint32 data_size);
-    void first_init ();
-  private:
-    handler_high_score ();
-  public:
-    ~handler_high_score ();
-    static handler_high_score *get_instance ();
-    bool is_player_ranked ();
-    player_score *get_high_score_table ();
-    char *get_best_playername ();
-    Uint32 get_best_score ();
-  };
+ private:
+  Uint32 scores_table_size;
+  bool is_player_ranked(char* playename, Uint32 score_value, Uint32 level_num, Uint32 area_num);
+  void sort_scores();
+  bool load_high_score();
+  void save_high_score();
+  Uint32 calculate_checksum(Uint32* addr, Uint32 data_size);
+  void first_init();
+
+ private:
+  handler_high_score();
+
+ public:
+  ~handler_high_score();
+  static handler_high_score* get_instance();
+  bool is_player_ranked();
+  player_score* get_high_score_table();
+  char* get_best_playername();
+  Uint32 get_best_score();
+};
 #endif

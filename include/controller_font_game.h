@@ -1,4 +1,4 @@
-/** 
+/**
  * @file controller_font_game.h
  * @brief Handle mobile characters used for "LEVEL n COMPLETED"
  * @date 2007-10-31
@@ -6,7 +6,7 @@
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -30,9 +30,8 @@
 class controller_font_game;
 #include "../include/objects_list.h"
 #include "../include/sprite_font_game.h"
-class controller_font_game:public objects_list < sprite_font_game, controller_font_game >
-{
-private:
+class controller_font_game : public objects_list<sprite_font_game, controller_font_game> {
+ private:
   /** Number of chars in the first string ("LEVEL n") */
   Uint32 size_of_line_1;
   /** Number of chars in the second string ("COMPLETED") */
@@ -46,14 +45,14 @@ private:
   static char ze_bobText[];
   static char ze_endText[];
 
-public:
-    controller_font_game ();
-   ~controller_font_game ();
-  void initialize (Uint32 level, Uint32 offset = 0);
-  void move ();
-  void enable ();
-private:
-  Uint32 set_start_values (Uint32 n, Uint32 a, Uint32 j, Sint32 y,
-                     Uint32 i3, Sint32 y3);
+ public:
+  controller_font_game();
+  ~controller_font_game();
+  void initialize(Uint32 level, Uint32 offset = 0);
+  void move();
+  void enable();
+
+ private:
+  Uint32 set_start_values(Uint32 n, Uint32 a, Uint32 j, Sint32 y, Uint32 i3, Sint32 y3);
 };
 #endif

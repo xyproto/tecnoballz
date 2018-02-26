@@ -29,23 +29,22 @@
 #ifndef __SPRITE_EJECTOR__
 #define __SPRITE_EJECTOR__
 class sprite_ejector;
-#include "../include/sprite_object.h"
-#include "../include/sprite_ball.h"
-#include "../include/controller_bricks.h"
 #include "../include/controller_balls.h"
+#include "../include/controller_bricks.h"
 #include "../include/controller_ejectors.h"
-class sprite_ejector:public sprite_object
-{
+#include "../include/sprite_ball.h"
+#include "../include/sprite_object.h"
+class sprite_ejector : public sprite_object {
   friend class controller_balls;
   friend class controller_ejectors;
 
-private:
-    Sint32 ball_offsetx;
+ private:
+  Sint32 ball_offsetx;
   Sint32 ball_offsety;
 
-public:
-    sprite_ejector (Sint32 ball_offx, Sint32 ball_offy);
-   ~sprite_ejector ();
-  void stick (sprite_ball * ball);
+ public:
+  sprite_ejector(Sint32 ball_offx, Sint32 ball_offy);
+  ~sprite_ejector();
+  void stick(sprite_ball* ball);
 };
 #endif

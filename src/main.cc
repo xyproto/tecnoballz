@@ -1,13 +1,13 @@
-/** 
- * @file main.cc 
- * @brief The main function is where the program starts execution 
- * @created 2002-08-21 
- * @date 2014-07-27 
+/**
+ * @file main.cc
+ * @brief The main function is where the program starts execution
+ * @created 2002-08-21
+ * @date 2014-07-27
  * @copyright 1991-2016 TLK Games
  * @author Bruno Ethvignot
  * @version $Revision$
  */
-/* 
+/*
  * copyright (c) 1991-2016 TLK Games all rights reserved
  * $Id$
  *
@@ -26,31 +26,27 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-#include "../include/tecnoballz.h"
-#include "../include/handler_display.h"
-#include "../include/handler_audio.h"
 #include "../include/configfile.h"
+#include "../include/handler_audio.h"
+#include "../include/handler_display.h"
+#include "../include/tecnoballz.h"
 configfile configuration;
 
 /**
  * Returns to the standard GP2X menu.
  */
 #ifdef TECNOBALLZ_GP2X
-void
-returnToMenu (void)
-{
+void returnToMenu(void) {
   /* This is how to quit back to the menu - calling exit() will just cause
    * the GP2X to "hang". execl() will replace the current process image
    *  with that of the menu program, and then execute it */
-  chdir ("/usr/gp2x");
-  execl ("/usr/gp2x/gp2xmenu", "/usr/gp2x/gp2xmenu", NULL);
+  chdir("/usr/gp2x");
+  execl("/usr/gp2x/gp2xmenu", "/usr/gp2x/gp2xmenu", NULL);
 }
 #else
 #ifdef TECNOBALLZ_PSP
-void
-returnToMenu (void)
-{
-  //sceKernelExitGame ();
+void returnToMenu(void) {
+  // sceKernelExitGame ();
 }
 #endif
 #endif
@@ -58,65 +54,53 @@ returnToMenu (void)
 /**
  * The main function is where the program starts execution
  */
-Sint32
-main (Sint32 arg_count, char **arg_values)
-{
-  /* GP2X or PSP port */
+Sint32 main(Sint32 arg_count, char** arg_values) {
+/* GP2X or PSP port */
 #ifdef TECNOBALLZ_HANDHELD_CONSOLE
   /* Use atexit() to call the return-to-menu function,
    * in case of crashes, etc. */
-  atexit (returnToMenu);
+  atexit(returnToMenu);
 #endif
 
-  configuration.load ();
-  if (!configuration.scan_arguments (arg_count, arg_values))
-    {
-      return 0;
-    }
-  if (tecnoballz::is_verbose)
-    {
-      std::cout << "================================" << std::endl
-        << "TecnoballZ starts! " << std::endl 
-        << "================================" << std::endl;
-    }
+  configuration.load();
+  if (!configuration.scan_arguments(arg_count, arg_values)) {
+    return 0;
+  }
+  if (tecnoballz::is_verbose) {
+    std::cout << "================================" << std::endl
+              << "TecnoballZ starts! " << std::endl
+              << "================================" << std::endl;
+  }
   Sint32 error = 0;
-  try
-    {
-      tecnoballz::first_init (&configuration);
-      tecnoballz::game_begin ();
-    }
-  catch (std::ios_base::failure& fail) 
-    {
-      std::cerr << "(!)std::ios_base::failure" << std::endl;
-      std::cerr << fail.what() << std::endl;
-    }
-  catch (...)
-    {
-      std::cerr << "fatal error" << std::endl;
-      tecnoballz::release_all_objects (&configuration);
-      throw;
-    }
-  if (tecnoballz::is_verbose)
-    {
-      std::cout << "================================" << std::endl;
-    }
-  tecnoballz::release_all_objects (&configuration);
-  if (tecnoballz::is_verbose)
-    {
-      std::cout << "TecnoballZ is finished! ========" << std::endl;
-    }
-  configuration.save ();
+  try {
+    tecnoballz::first_init(&configuration);
+    tecnoballz::game_begin();
+  } catch (std::ios_base::failure& fail) {
+    std::cerr << "(!)std::ios_base::failure" << std::endl;
+    std::cerr << fail.what() << std::endl;
+  } catch (...) {
+    std::cerr << "fatal error" << std::endl;
+    tecnoballz::release_all_objects(&configuration);
+    throw;
+  }
+  if (tecnoballz::is_verbose) {
+    std::cout << "================================" << std::endl;
+  }
+  tecnoballz::release_all_objects(&configuration);
+  if (tecnoballz::is_verbose) {
+    std::cout << "TecnoballZ is finished! ========" << std::endl;
+  }
+  configuration.save();
   return error;
 }
 
-
 /*
- 
+
 a faire
 importer le fichier lispreader.c de powermanga et l'encapsuler en c++
 afficher le niveau de difficulte dans le magasin
 retoucher les briques
-ameliorer la gestion du clavier (genre sdlmame) 
+ameliorer la gestion du clavier (genre sdlmame)
 supprimer l'inverseur apres la perte d'une balle
 [OK] desactiver le tilt pour les balles controles
 [OK] utiliser les tilemaps de 16x16 originales dans le definlement menu/gardiens pour eviter
@@ -129,21 +113,21 @@ supprimer l'inverseur apres la perte d'une balle
 [OK] si game over supprimer les gems
  - faire les textes du jeu (intro, magasin, jeu) en francais et anglais (fichiers externes)
  - accelerer l'affichage des mini messages si beaucoup de bonus
- 
- [OK] faire des fonds defilents des tableaux briques 
- - ? mettre les donnees (tableaux, sprites?, ...) au format XML avec tiny xml 
- - ? utiliser kyro comme moteur de sprites 
+
+ [OK] faire des fonds defilents des tableaux briques
+ - ? mettre les donnees (tableaux, sprites?, ...) au format XML avec tiny xml
+ - ? utiliser kyro comme moteur de sprites
  - ? mode balle Arkanoid ?
 
 main
-*mentatCode => tecnoballz 
-*liste_BOBs => list_sprites 
+*mentatCode => tecnoballz
+*liste_BOBs => list_sprites
 *supervisor => supervisor
-configfile  => 
+configfile  =>
 lispreader  =>
-*GFX_bitmap 
+*GFX_bitmap
 *GIF_bitMap => bitmap_data
- 
+
 *BOB_killer  => sprite_object
 
 *giga_blitz  => sprite_gigablitz
@@ -160,7 +144,7 @@ lispreader  =>
 *tecno_gard  => sprite_guardian
 *tecno_miss  => sprite_bullet
 *tecno_text  => sprite_font_game
- 
+
 *ballDirect  => controller_viewfinders
 *lesBriques  => controller_bricks
 *printmoney  => controller_indicators
@@ -184,29 +168,29 @@ lispreader  =>
 *tableaux_Z  => supervisor_bricks_level
 *gard_tecno  => supervisor_guards_level
 *shop_tecno  => supervisor_shop
-*menu_tecno  => supervisor_supervisor_map_editoror 
+*menu_tecno  => supervisor_supervisor_map_editoror
 *scrolledit  => supervisor_main_menu
 
-*escapeMenu  => item_popup_menu 
-*audiomixer  => handler_audio 
+*escapeMenu  => item_popup_menu
+*audiomixer  => handler_audio
 *clavierMac  => handler_keyboard
-*ecran_hard  => handler_display 
+*ecran_hard  => handler_display
              => offscreen_surface
 *RAM_killer  => handler_memory
-*ressources  => handler_resources 
+*ressources  => handler_resources
 *scoretable  => handler_score_table
 *joueurData  => handler_players
-*level_data  => handler_levels 
-*print_text  => display_text_bitmap 
+*level_data  => handler_levels
+*print_text  => display_text_bitmap
 
-*zeMiniMess  => short_info_messages 
-*barreScore  => right_panel_score 
+*zeMiniMess  => short_info_messages
+*barreScore  => right_panel_score
 *briqueCote  => controller_sides_bricks
 *ejectBalls  => controller_ejectors
 *fond_ecran  => tiles_background
-*head_anima  => head_animation 
-*lastScroll  => tilesmap_scrolling 
-*print_menu  => sprite_display_menu 
+*head_anima  => head_animation
+*lastScroll  => tilesmap_scrolling
+*print_menu  => sprite_display_menu
 *score_over  => sprite_display_scores
 
 
